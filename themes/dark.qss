@@ -691,6 +691,12 @@ QLabel[statusType="error"] {
 QLabel[statusType="info"] {
     color: var(--info-color);
 }
+
+QLabel#labelTools {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
 /* Reorder animation states için */
 QWidget[animationState="from"] {
     background-color: var(--reorder-from) !important;
