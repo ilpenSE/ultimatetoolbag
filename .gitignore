@@ -1,2 +1,6 @@
 tools/json.hpp
 tools/updatechecks.cpp
+
+.vscode/*
+.vscode
+.vscode/

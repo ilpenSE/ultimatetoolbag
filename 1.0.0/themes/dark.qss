@@ -1,15 +1,15 @@
 /* Theme color definitions for dynamic icons (DO NOT CHANGE THIS FILE) */
-/* @icon-color: #323130 */      /* Normal state */
-/* @hover-color: #106ebe */     /* Hover state */
-/* @pressed-color: #005a9e */   /* Pressed state */
-/* @disabled-color: #a6a6a6 */  /* Disabled state */
+/* @icon-color: #cccccc */      /* Normal state */
+/* @hover-color: #ffffff */     /* Hover state */
+/* @pressed-color: #888888 */   /* Pressed state */
+/* @disabled-color: #555555 */  /* Disabled state */
 
-/* Light Theme Color Variables */
+/* Dark Theme Color Variables */
 :root {
     /* Primary Colors - Fluent UI inspired */
-    --primary-bg: #ffffff;
-    --secondary-bg: #f6f6f6;
-    --tertiary-bg: #f9f9f9;
+    --primary-bg: #1e1e1e;
+    --secondary-bg: #2d2d30;
+    --tertiary-bg: #252526;
     --accent-color: #0078d4;
     --accent-hover: #106ebe;
     --accent-pressed: #005a9e;
@@ -21,13 +21,13 @@
     --info-color: #4287f5;
     
     /* Text Colors */
-    --text-primary: #323130;
-    --text-secondary: #605e5c;
-    --text-disabled: #a6a6a6;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-disabled: #666666;
     
     /* Border Colors */
-    --border-primary: #d1d1d1;
-    --border-secondary: #c8c6c4;
+    --border-primary: #3f3f46;
+    --border-secondary: #505050;
     --border-focus: #0078d4;
     
     /* Reorder Mode Colors */
@@ -64,19 +64,19 @@ QPushButton {
 }
 
 QPushButton:hover {
-    background-color: #e1dfdd;
+    background-color: #3c3c41;
     border-color: var(--border-secondary);
 }
 
 QPushButton:pressed {
-    background-color: #d2d0ce;
-    border-color: #b3b0ad;
+    background-color: #484848;
+    border-color: #606060;
 }
 
 QPushButton:disabled {
-    background-color: #f3f2f1;
+    background-color: #1a1a1a;
     color: var(--text-disabled);
-    border-color: #edebe9;
+    border-color: #2a2a2a;
 }
 
 /* Icon-only buttons */
@@ -92,7 +92,6 @@ QPushButton[iconOnly="true"] {
 QPushButton[primary="true"] {
     background-color: var(--accent-color);
     border-color: var(--accent-hover);
-    color: #ffffff;
 }
 
 QPushButton[primary="true"]:hover {
@@ -106,13 +105,12 @@ QPushButton[primary="true"]:pressed {
 
 /* Text Input */
 QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
     border-radius: 4px;
     color: var(--text-primary);
     padding: 6px 10px;
     selection-background-color: var(--accent-color);
-    selection-color: #ffffff;
     font-size: 9pt;
     min-height: 20px;
 }
@@ -133,32 +131,26 @@ QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
     border-width: 2px;
 }
 
-QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
-    border-color: var(--border-focus);
-    border-width: 2px;
-}
-
 QLineEdit:disabled, QTextEdit:disabled, QPlainTextEdit:disabled {
-    background-color: #f3f2f1;
+    background-color: #1a1a1a;
     color: var(--text-disabled);
-    border-color: #edebe9;
+    border-color: #2a2a2a;
 }
 
 QSpinBox {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
     border-radius: 4px;
     color: var(--text-primary);
     padding: 4px;
     selection-background-color: var(--accent-color);
-    selection-color: #ffffff;
     font-size: 9pt;
     min-height: 20px;
 }
 
 /* ComboBox */
 QComboBox {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
     border-radius: 4px;
     color: var(--text-primary);
@@ -171,11 +163,10 @@ QComboBox {
 
 QTableWidget QComboBox:disabled {
     border-radius: 2px;
-    color: var(--text-disabled);
-    background-color: #f3f2f1;
+    color: #8b8b8b;
+    background-color: #3c3c3c;
 }
 
-/* Tablo içindeki ComboBox'lar için özel ayar */
 QTableWidget QComboBox {
     margin: 1px;
     min-width: 80px;
@@ -183,7 +174,6 @@ QTableWidget QComboBox {
 
 QComboBox:hover {
     border-color: var(--border-secondary);
-    background-color: var(--secondary-bg);
 }
 
 QComboBox:focus {
@@ -209,7 +199,7 @@ QComboBox::down-arrow {
 }
 
 QComboBox QAbstractItemView {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
     border-radius: 4px;
     selection-background-color: var(--accent-color);
@@ -248,7 +238,7 @@ QCheckBox::indicator {
     height: 16px;
     border-radius: 2px;
     border: 1px solid var(--border-primary);
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
 }
 
 QCheckBox::indicator:hover {
@@ -277,7 +267,7 @@ QRadioButton::indicator {
     height: 16px;
     border-radius: 8px;
     border: 1px solid var(--border-primary);
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
 }
 
 QRadioButton::indicator:hover {
@@ -345,16 +335,16 @@ QMenuBar::item {
 }
 
 QMenuBar::item:selected {
-    background-color: #e1dfdd;
+    background-color: #3c3c41;
 }
 
 QMenuBar::item:pressed {
-    background-color: #d2d0ce;
+    background-color: #484848;
 }
 
 /* Menu */
 QMenu {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
     border-radius: 8px;
     color: var(--text-primary);
@@ -367,7 +357,7 @@ QMenu::item {
 }
 
 QMenu::item:selected {
-    background-color: var(--secondary-bg);
+    background-color: #3c3c41;
 }
 
 QMenu::separator {
@@ -393,11 +383,11 @@ QToolButton {
 }
 
 QToolButton:hover {
-    background-color: #e1dfdd;
+    background-color: #3c3c41;
 }
 
 QToolButton:pressed {
-    background-color: #d2d0ce;
+    background-color: #484848;
 }
 
 /* Status Bar */
@@ -431,7 +421,7 @@ QTabBar::tab:selected {
 }
 
 QTabBar::tab:hover:!selected {
-    background-color: #e1dfdd;
+    background-color: #3c3c41;
 }
 
 /* Scroll Bar */
@@ -495,7 +485,7 @@ QGroupBox::title {
 
 /* List Widget - QTableWidget için de eklenecek */
 QListWidget, QTableWidget {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
     border-radius: 4px;
     color: var(--text-primary);
@@ -510,32 +500,32 @@ QListWidget::item, QTableWidget::item {
 }
 
 QListWidget::item:hover, QTableWidget::item:hover {
-    background-color: var(--secondary-bg);
+    background-color: #3c3c41;
 }
 
 QListWidget::item:selected, QTableWidget::item:selected {
     background-color: var(--accent-color);
-    color: #ffffff;
+    color: var(--text-primary);
     border: 1px solid var(--accent-hover);
 }
 
 QTableWidget QLineEdit {
-    background-color: #ffffff;
+    background-color: #000000;
     border: 2px solid var(--accent-color);
     border-radius: 2px;
-    color: var(--text-primary);
+    color: #000000;
     padding: 2px 4px;
     margin: 0px;
     font-size: 9pt;
     selection-background-color: var(--accent-color);
-    selection-color: #ffffff;
+    selection-color: var(--text-primary);
 }
 
 QTableWidget QLineEdit:focus {
     border-color: var(--accent-pressed);
     border-width: 2px;
     border-radius: 2px;
-    background-color: #ffffff;
+    background-color: #dbdbdb;
 }
 
 /* QTableWidget specific ComboBox styling */
@@ -565,7 +555,7 @@ QTableWidget QComboBox::down-arrow {
 }
 
 QTableWidget QComboBox QAbstractItemView {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
     border-radius: 4px;
     selection-background-color: var(--accent-color);
@@ -578,7 +568,7 @@ QTableWidget QComboBox QAbstractItemView {
 QTableWidget QPushButton {
     margin: 0px;
     padding: 2px 4px;
-    border: 1px solid var(--border-primary);
+    border: 1px solid var(--secondary-bg);
     background-color: var(--secondary-bg);
     color: var(--text-primary);
     border-radius: 2px;
@@ -590,7 +580,7 @@ QTableWidget QPushButton {
 }
 
 QTableWidget QPushButton:hover {
-    background-color: #e1dfdd;
+    background-color: #3c3c41;
     border-color: var(--border-secondary);
 }
 
@@ -627,12 +617,12 @@ QHeaderView::section {
 }
 
 QHeaderView::section:hover {
-    background-color: #e1dfdd;
+    background-color: #3c3c41;
 }
 
 /* Tree Widget */
 QTreeWidget {
-    background-color: var(--primary-bg);
+    background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
     border-radius: 4px;
     color: var(--text-primary);
@@ -647,12 +637,12 @@ QTreeWidget::item {
 }
 
 QTreeWidget::item:hover {
-    background-color: var(--secondary-bg);
+    background-color: #3c3c41;
 }
 
 QTreeWidget::item:selected {
     background-color: var(--accent-color);
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 /* Splitter */
@@ -670,8 +660,8 @@ QSplitter::handle:vertical {
 
 /* Tooltip */
 QToolTip {
-    background-color: #f3f2f1;
-    border: 1px solid var(--border-primary);
+    background-color: #404040;
+    border: 1px solid #606060;
     border-radius: 4px;
     color: var(--text-primary);
     padding: 4px 8px;
@@ -680,9 +670,6 @@ QToolTip {
 
 /* Reorder Mode Specific Styling */
 QLabel[reorderMode="true"] {
-    background-color: var(--reorder-info-bg);
-    border: 1px solid var(--reorder-border);
-    border-radius: 6px;
     padding: 8px 12px;
     font-weight: bold;
     color: var(--info-color);
@@ -690,32 +677,19 @@ QLabel[reorderMode="true"] {
 
 /* Status Message Styling */
 QLabel[statusType="success"] {
-    background-color: var(--reorder-success-bg);
-    border: 1px solid var(--success-color);
     color: var(--success-color);
 }
 
 QLabel[statusType="warning"] {
-    background-color: var(--reorder-warning-bg);
-    border: 1px solid var(--warning-color);
     color: var(--warning-color);
 }
 
 QLabel[statusType="error"] {
-    background-color: var(--reorder-error-bg);
-    border: 1px solid var(--error-color);
     color: var(--error-color);
 }
 
 QLabel[statusType="info"] {
-    background-color: var(--reorder-info-bg);
-    border: 1px solid var(--info-color);
     color: var(--info-color);
-}
-
-QLabel#labelTools {
-    font-size: 18pt;
-    font-weight: bold;
 }
 
 /* Reorder animation states için */
@@ -732,6 +706,5 @@ QWidget[animationState="to"] {
 QWidget[reorderHighlight="true"] {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
         stop:0 var(--reorder-bg), stop:1 var(--reorder-bg-light)) !important;
-    border: 2px solid var(--reorder-border) !important;
     border-radius: 3px;
 }
