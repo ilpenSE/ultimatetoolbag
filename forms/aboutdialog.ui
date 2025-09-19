@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>446</width>
+    <height>325</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>About</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/assets/icons/icon.ico</normaloff>:/assets/icons/icon.ico</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutTop">
+     <item>
+      <widget class="QTextBrowser" name="textAbt">
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;h1 style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:11pt; font-weight:700;&quot;&gt;Ultimate Toolbag&lt;/span&gt;&lt;/h1&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt;&quot;&gt;Version: &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt; font-weight:700;&quot;&gt;1.0.0&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt;&quot;&gt;Author: &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt; font-weight:700;&quot;&gt;ilpeN&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt;&quot;&gt;License: &lt;/span&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt; font-weight:700;&quot;&gt;GNU General Public License v3.0 (GPLv3)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt;&quot;&gt;Built with Qt (Free Edition) and PostgreSQL&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt;&quot;&gt;This application uses the Qt framework (LGPLv3). Qt is a free and open-source project by The Qt Company and contributors.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt;&quot;&gt;Made in Türkiye&lt;/span&gt;&lt;/p&gt;
+&lt;h2 style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI','sans-serif'; font-size:10pt; font-weight:700;&quot;&gt;Links&lt;/span&gt;&lt;/h2&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://github.com/ilpenSE&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#27bf73;&quot;&gt;GitHub&lt;/span&gt;&lt;/a&gt; |  &lt;a href=&quot;https://instagram.com/ilpen.25&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#27bf73;&quot;&gt;Instagram&lt;/span&gt;&lt;/a&gt; |  &lt;a href=&quot;https://x.com/ilpenwastaken&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#27bf73;&quot;&gt;X&lt;/span&gt;&lt;/a&gt; |  &lt;a href=&quot;https://youtube.com/@ilpenwastaken&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#27bf73;&quot;&gt;YouTube&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="buttonOK">
+     <property name="text">
+      <string>OK</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

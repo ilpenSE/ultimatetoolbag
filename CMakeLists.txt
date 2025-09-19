@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Network Svg)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Network Svg)
 
 set(TS_FILES
     assets/locale/en_US.ts
@@ -18,39 +18,72 @@ set(TS_FILES
     assets/locale/de_DE.ts
     assets/locale/fr_FR.ts
     assets/locale/it_IT.ts
-    assets/locale/es_ES.ts)
+    assets/locale/es_ES.ts
+    assets/locale/ru_RU.ts)
+
+set(ICONS
+    assets/icons/account.svg
+    assets/icons/add.svg
+    assets/icons/back.svg
+    assets/icons/cancel.svg
+    assets/icons/delete.svg
+    assets/icons/edit.svg
+    assets/icons/fav.svg
+    assets/icons/faved.svg
+    assets/icons/info.svg
+    assets/icons/save.svg
+    assets/icons/select.svg
+    assets/icons/settings.svg
+)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        forms/mainwindow.cpp
+        forms/mainwindow.h
+        forms/mainwindow.ui
+        skeleton/languagemanager.h skeleton/languagemanager.cpp
+        skeleton/fileorganizer.h skeleton/fileorganizer.cpp
+        etc/consts.h etc/enums.h skeleton/versionmanager.h
+        skeleton/logger.cpp skeleton/logger.h skeleton/loggerstream.h
+        skeleton/settingsmanager.h skeleton/settingsmanager.cpp
+        skeleton/thememanager.h skeleton/thememanager.cpp
+        skeleton/iconutils.h skeleton/iconutils.cpp
+        lib/imagerepair.h lib/imagerepair.cpp
+        skeleton/assetvalidator.h skeleton/assetvalidator.cpp
+        skeleton/groupmanager.h skeleton/groupmanager.cpp
+        etc/instances.h
+        skeleton/favoritesmanager.h skeleton/favoritesmanager.cpp
+        skeleton/toastmanager.h skeleton/toastmanager.cpp
+        forms/aboutdialog.h forms/aboutdialog.cpp forms/aboutdialog.ui
         ${TS_FILES}
 )
 
+set(PROJECT_RESOURCES
+    translations.qrc
+    icons.qrc
+    resources.qrc
+    assets/global.qss
+)
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    find_package(Qt6 REQUIRED COMPONENTS Core Network LinguistTools)
+    find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
     qt_add_executable(UltimateToolbag
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        languagemanager.h languagemanager.cpp
-        appdatamanager.h appdatamanager.cpp
-        consts.h enums.h versionmanager.h
-        etagcontroller.h etagcontroller.cpp
-        logger.cpp logger.h LoggerStream.h
-        settingsmanager.h settingsmanager.cpp
-        thememanager.h thememanager.cpp
-        iconutils.h iconutils.cpp
+        ${PROJECT_RESOURCES}
+        ${ICONS}
     )
 
     qt_add_translations(UltimateToolbag
         TS_FILES ${TS_FILES}
         QM_FILES_OUTPUT_VARIABLE QM_FILES
+        OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}"
     )
 
-    qt_add_resources(UltimateToolbag translations.qrc)
-
+    qt_add_resources(UltimateToolbag ${PROJECT_RESOURCES})
 
 else()
     if(ANDROID)
@@ -66,7 +99,15 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(UltimateToolbag PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(UltimateToolbag
+    PRIVATE
+        Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Svg
+)
+target_link_libraries(UltimateToolbag PRIVATE Qt6::Core)
+target_link_libraries(UltimateToolbag PRIVATE Qt6::Core)
 target_link_libraries(UltimateToolbag PRIVATE Qt6::Core)
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)

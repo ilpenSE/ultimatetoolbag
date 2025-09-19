@@ -6,5 +6,6 @@
         <file>assets/locale/fr_FR.qm</file>
         <file>assets/locale/it_IT.qm</file>
         <file>assets/locale/tr_TR.qm</file>
+        <file>assets/locale/ru_RU.qm</file>
     </qresource>
 </RCC>

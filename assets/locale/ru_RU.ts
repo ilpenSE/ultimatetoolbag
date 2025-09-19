@@ -1,159 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>MainWindow</name>
     <message>
         <source>Tools</source>
-        <translation>Werkzeuge</translation>
+        <translation>Инструменты</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation>Поиск</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>Edit Groups</source>
-        <translation>Gruppen bearbeiten</translation>
+        <translation>Редактировать группы</translation>
     </message>
     <message>
         <source>About the app</source>
-        <translation>Über die Anwendung</translation>
+        <translation>О приложении</translation>
     </message>
     <message>
         <source>Edit tool groups name</source>
-        <translation>Namen der Werkzeuggruppen bearbeiten</translation>
+        <translation>Редактировать названия групп инструментов</translation>
     </message>
     <message>
         <source>App settings</source>
-        <translation>Anwendungseinstellungen</translation>
+        <translation>Настройки приложения</translation>
     </message>
     <message>
         <source>Account information</source>
-        <translation>Kontoinformationen</translation>
+        <translation>Информация об аккаунте</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation>Konto</translation>
+        <translation>Аккаунт</translation>
     </message>
     <message>
         <source>Favorite tools</source>
-        <translation>Favoriten</translation>
+        <translation>Избранные инструменты</translation>
     </message>
     <message>
         <source>update available</source>
-        <translation>Aktualisierung verfügbar!</translation>
+        <translation>обновление доступно</translation>
     </message>
     <message>
         <source>Dev Tools</source>
-        <translation>Entwicklertools</translation>
+        <translation>Инструменты разработчика</translation>
     </message>
     <message>
         <source>File Converter</source>
-        <translation>Dateikonverter</translation>
+        <translation>Конвертер файлов</translation>
     </message>
     <message>
         <source>Repairers</source>
-        <translation>Reparaturwerkzeuge</translation>
+        <translation>Ремонтники</translation>
     </message>
     <message>
         <source>Unit Converter</source>
-        <translation>Einheitenumrechner</translation>
+        <translation>Конвертер единиц</translation>
     </message>
     <message>
         <source>jsonprettier</source>
-        <translation>JSON-Formatter</translation>
+        <translation>Форматировщик JSON</translation>
     </message>
     <message>
         <source>curl</source>
-        <translation>CURL-Tool</translation>
+        <translation>Инструмент CURL</translation>
     </message>
     <message>
         <source>hashgen</source>
-        <translation>Hash-Generator</translation>
+        <translation>Генератор хэшей</translation>
     </message>
     <message>
         <source>aesrsa</source>
-        <translation>AES/RSA-Verschlüsseler</translation>
+        <translation>Шифратор AES/RSA</translation>
     </message>
     <message>
         <source>baseencoder</source>
-        <translation>Base64-Kodierer</translation>
+        <translation>Кодировщик Base64</translation>
     </message>
     <message>
         <source>colorpicker</source>
-        <translation>Farbauswahl</translation>
+        <translation>Выбор цвета</translation>
     </message>
     <message>
         <source>regextester</source>
-        <translation>Regex-Testwerkzeug</translation>
+        <translation>Инструмент тестирования Regex</translation>
     </message>
     <message>
         <source>apitester</source>
-        <translation>API-Testwerkzeug</translation>
+        <translation>Инструмент тестирования API</translation>
     </message>
     <message>
         <source>pdfword</source>
-        <translation>PDF/Word-Konverter</translation>
+        <translation>Конвертер PDF/Word</translation>
     </message>
     <message>
         <source>ziprar</source>
-        <translation>ZIP/RAR-Komprimierer/Entpacker</translation>
+        <translation>Сжатие/Распаковка ZIP/RAR</translation>
     </message>
     <message>
         <source>videoaudio</source>
-        <translation>Video/Audio-Konverter</translation>
+        <translation>Конвертер Видео/Аудио</translation>
     </message>
     <message>
         <source>jsonfixer</source>
-        <translation>JSON-Reparaturwerkzeug</translation>
+        <translation>Ремонтник JSON</translation>
     </message>
     <message>
         <source>imagefixer</source>
-        <translation>Bildreparaturwerkzeug</translation>
+        <translation>Ремонтник изображений</translation>
     </message>
     <message>
         <source>length</source>
-        <translation>Länge</translation>
+        <translation>Длина</translation>
     </message>
     <message>
         <source>time</source>
-        <translation>Zeit</translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>currency</source>
-        <translation>Währung</translation>
+        <translation>Валюта</translation>
     </message>
     <message>
         <source>weight</source>
-        <translation>Gewicht</translation>
+        <translation>Вес</translation>
     </message>
     <message>
         <source>temperature</source>
-        <translation>Temperatur</translation>
+        <translation>Температура</translation>
     </message>
     <message>
         <source>Add to favorites</source>
-        <translation>Zu Favoriten hinzufügen</translation>
+        <translation>Добавить в избранное</translation>
     </message>
     <message>
         <source>Remove from favorites</source>
-        <translation>Aus Favoriten entfernen</translation>
+        <translation>Удалить из избранного</translation>
     </message>
     <message>
         <source>%1 added to favorites</source>
-        <translation>%1 zu Favoriten hinzugefügt</translation>
+        <translation>%1 добавлен в избранное</translation>
     </message>
     <message>
         <source>%1 removed from favorites</source>
-        <translation>%1 aus Favoriten entfernt</translation>
+        <translation>%1 удалён из избранного</translation>
     </message>
 </context>
 </TS>
