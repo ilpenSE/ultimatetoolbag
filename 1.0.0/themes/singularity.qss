@@ -1,43 +1,127 @@
 /* Theme color definitions for dynamic icons (DO NOT CHANGE THIS FILE) */
-/* @icon-color: #cccccc */      /* Normal state */
-/* @hover-color: #ffffff */     /* Hover state */
-/* @pressed-color: #888888 */   /* Pressed state */
-/* @disabled-color: #555555 */  /* Disabled state */
+/* @icon-color: #00d4ff */      /* Normal state - Cyan */
+/* @hover-color: #66e5ff */     /* Hover state - Light cyan */
+/* @pressed-color: #0099cc */   /* Pressed state - Dark cyan */
+/* @disabled-color: #4a5568 */  /* Disabled state - Gray */
 
-/* Singularity Theme Color Variables */
+/* Singularity Theme - Futuristic Linear Gradients */
 :root {
-  /* Primary Colors */
-  --primary-bg: #1e1e1e;
-  --secondary-bg: #2d2d30;
-  --tertiary-bg: #252526;
-  --accent-color: #0078d4;
-  --accent-hover: #106ebe;
-  --accent-pressed: #005a9e;
-  
-  /* Status Colors */
-  --success-color: #16c60c;
-  --warning-color: #ff8c00;
-  --error-color: #e74c3c;
-  --info-color: #4287f5;
-  
-  /* Text Colors */
-  --text-primary: #ffffff;
-  --text-secondary: #cccccc;
-  --text-disabled: #666666;
-  
-  /* Border Colors */
-  --border-primary: #3f3f46;
-  --border-secondary: #505050;
-  --border-focus: #0078d4;
-  
-  /* Reorder Mode Colors */
-  --reorder-bg: #4287f5;
-  --reorder-bg-light: rgba(66, 135, 245, 0.15);
-  --reorder-border: rgba(66, 135, 245, 0.3);
-  --reorder-from: #e67e22;
-  --reorder-to: #27ae60;
-  --reorder-info-bg: rgba(66, 135, 245, 0.1);
-  --reorder-success-bg: rgba(39, 174, 96, 0.1);
-  --reorder-warning-bg: rgba(255, 140, 0, 0.1);
-  --reorder-error-bg: rgba(231, 76, 60, 0.1);
+    /* Primary Colors - Deep space with cyan accents */
+    --primary-bg: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #0a0e1a, stop: 0.5 #1a1f2e, stop: 1 #0f1419);
+    --secondary-bg: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #1e2532, stop: 1 #252b3a);
+    --tertiary-bg: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #2a3441, stop: 1 #1f2633);
+    --accent-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #00d4ff, stop: 1 #0099ff);
+    --accent-hover: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #33ddff, stop: 1 #00aaff);
+    --accent-pressed: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #0099cc, stop: 1 #0077aa);
+    
+    /* Status Colors - Neon versions */
+    --success-color: #00ff88;
+    --warning-color: #ffaa00;
+    --error-color: #ff4466;
+    --info-color: #00d4ff;
+    
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #b3d9ff;
+    --text-disabled: #5a6b7d;
+    
+    /* Border Colors */
+    --border-primary: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #334155, stop: 1 #475569);
+    --border-secondary: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #4a5568, stop: 1 #64748b);
+    --border-focus: #00d4ff;
+    
+    /* Reorder Mode Colors */
+    --reorder-bg: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #00d4ff, stop: 1 #0099ff);
+    --reorder-bg-light: rgba(0, 212, 255, 0.15);
+    --reorder-border: rgba(0, 212, 255, 0.3);
+    --reorder-from: #ff6600;
+    --reorder-to: #00ff88;
+    --reorder-info-bg: rgba(0, 212, 255, 0.1);
+    --reorder-success-bg: rgba(0, 255, 136, 0.1);
+    --reorder-warning-bg: rgba(255, 170, 0, 0.1);
+    --reorder-error-bg: rgba(255, 68, 102, 0.1);
+
+    /* Tree Widget Item hover */
+    --tree-item-hover-bg: rgba(0, 212, 255, 0.08);
+    --tree-item-hover-border: rgba(0, 212, 255, 0.15);
+}
+
+/* Singularity Theme Specific Overrides */
+
+/* Toolbar gradient override */
+QMainWindow {
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, 
+                stop: 0 #0a0e1a, 
+                stop: 0.3 #1a1f2e, 
+                stop: 0.7 #1a1f2e, 
+                stop: 1 #0f1419);
+}
+
+QToolBar {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--primary-bg);
+}
+
+QMdiArea, QSplitter, QWidget[objectName="centralwidget"] {
+    background: transparent;
+    border: none;
+}
+
+QMainWindow::separator {
+    background: transparent;
+    width: 0px;
+    height: 0px;
+}
+
+/* remove toolbar seperator */
+QToolBar::separator {
+    background: transparent;
+    width: 0px;
+    height: 0px;
+}
+
+/* Container widgets transparency */
+QWidget[objectName="sidePanel"] {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+QStackedWidget[objectName="toolsStack"] {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+QWidget[objectName="grPage"],
+QWidget[objectName="favPage"],
+QWidget[objectName="searchPage"] {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+/* Layout containers */
+QWidget[objectName="centralwidget"] {
+    background-color: transparent;
+    border: none;
+}
+
+/* VBox/HBox layout widget wrappers */
+QVBoxLayout, QHBoxLayout {
+  background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+/* Label transparency */
+QLabel {
+    background-color: transparent;
+    border: none;
+}
+
+QFormLayout QLabel,
+QDialog QLabel {
+    background-color: transparent;
 }

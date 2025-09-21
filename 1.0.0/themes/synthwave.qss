@@ -1,43 +1,55 @@
 /* Theme color definitions for dynamic icons (DO NOT CHANGE THIS FILE) */
-/* @icon-color: #cccccc */      /* Normal state */
-/* @hover-color: #ffffff */     /* Hover state */
-/* @pressed-color: #888888 */   /* Pressed state */
-/* @disabled-color: #555555 */  /* Disabled state */
+/* @icon-color: #ff007c */      /* Normal state - Hot pink */
+/* @hover-color: #ff33aa */     /* Hover state - Light pink */
+/* @pressed-color: #cc0066 */   /* Pressed state - Dark pink */
+/* @disabled-color: #4a4a5e */  /* Disabled state - Purple gray */
 
-/* Synthwave Theme Color Variables */
+/* Synthwave Theme - Retro 80s Neon Aesthetic */
 :root {
-  /* Primary Colors */
-  --primary-bg: #1e1e1e;
-  --secondary-bg: #2d2d30;
-  --tertiary-bg: #252526;
-  --accent-color: #0078d4;
-  --accent-hover: #106ebe;
-  --accent-pressed: #005a9e;
-  
-  /* Status Colors */
-  --success-color: #16c60c;
-  --warning-color: #ff8c00;
-  --error-color: #e74c3c;
-  --info-color: #4287f5;
-  
-  /* Text Colors */
-  --text-primary: #ffffff;
-  --text-secondary: #cccccc;
-  --text-disabled: #666666;
-  
-  /* Border Colors */
-  --border-primary: #3f3f46;
-  --border-secondary: #505050;
-  --border-focus: #0078d4;
-  
-  /* Reorder Mode Colors */
-  --reorder-bg: #4287f5;
-  --reorder-bg-light: rgba(66, 135, 245, 0.15);
-  --reorder-border: rgba(66, 135, 245, 0.3);
-  --reorder-from: #e67e22;
-  --reorder-to: #27ae60;
-  --reorder-info-bg: rgba(66, 135, 245, 0.1);
-  --reorder-success-bg: rgba(39, 174, 96, 0.1);
-  --reorder-warning-bg: rgba(255, 140, 0, 0.1);
-  --reorder-error-bg: rgba(231, 76, 60, 0.1);
+    /* Primary Colors - Dark purple with neon accents */
+    --primary-bg: #241b2f;
+    --secondary-bg: #2a1e3e;
+    --tertiary-bg: #322347;
+    --accent-color: #ff007c;
+    --accent-hover: #ff339a;
+    --accent-pressed: #cc0066;
+    
+    /* Status Colors - Neon synthwave palette */
+    --success-color: #39ff14;
+    --warning-color: #ffdd00;
+    --error-color: #ff073a;
+    --info-color: #00d9ff;
+    
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #f8f8f2;
+    --text-disabled: #6272a4;
+    
+    /* Border Colors */
+    --border-primary: #44475a;
+    --border-secondary: #6272a4;
+    --border-focus: #ff007c;
+    
+    /* Reorder Mode Colors */
+    --reorder-bg: #ff007c;
+    --reorder-bg-light: rgba(255, 0, 124, 0.15);
+    --reorder-border: rgba(255, 0, 124, 0.3);
+    --reorder-from: #ffb86c;
+    --reorder-to: #50fa7b;
+    --reorder-info-bg: rgba(0, 217, 255, 0.1);
+    --reorder-success-bg: rgba(57, 255, 20, 0.1);
+    --reorder-warning-bg: rgba(255, 221, 0, 0.1);
+    --reorder-error-bg: rgba(255, 7, 58, 0.1);
+
+    /* Tree Widget Item hover */
+    --tree-item-hover-bg: rgba(255, 0, 124, 0.08);
+    --tree-item-hover-border: rgba(255, 0, 124, 0.15);
+    
+    /* Additional Synthwave Colors */
+    --synthwave-purple: #8b5cf6;
+    --synthwave-blue: #00d9ff;
+    --synthwave-pink: #ff007c;
+    --synthwave-green: #39ff14;
+    --synthwave-orange: #ffb86c;
+    --synthwave-yellow: #ffdd00;
 }
