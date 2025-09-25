@@ -44,7 +44,8 @@
     /* Tree Widget Item hover */
     --tree-item-hover-bg: rgba(255, 0, 124, 0.08);
     --tree-item-hover-border: rgba(255, 0, 124, 0.15);
-    
+    --stack-bg: #2a1e3e;
+
     /* Additional Synthwave Colors */
     --synthwave-purple: #8b5cf6;
     --synthwave-blue: #00d9ff;

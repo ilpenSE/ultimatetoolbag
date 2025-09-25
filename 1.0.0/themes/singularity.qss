@@ -44,6 +44,7 @@
     /* Tree Widget Item hover */
     --tree-item-hover-bg: rgba(0, 212, 255, 0.08);
     --tree-item-hover-border: rgba(0, 212, 255, 0.15);
+    --stack-bg: transparent;
 }
 
 /* Singularity Theme Specific Overrides */
@@ -88,40 +89,17 @@ QWidget[objectName="sidePanel"] {
     outline: none;
 }
 
-QStackedWidget[objectName="toolsStack"] {
+/* Fix for container widgets to prevent background bleeding */
+QTreeWidget {
     background-color: transparent;
-    border: none;
-    outline: none;
+    border: 2px solid var(--border-primary);
 }
 
-QWidget[objectName="grPage"],
-QWidget[objectName="favPage"],
-QWidget[objectName="searchPage"] {
+/* Fix viewport background */
+QTreeWidget QAbstractScrollArea {
     background-color: transparent;
-    border: none;
-    outline: none;
 }
 
-/* Layout containers */
-QWidget[objectName="centralwidget"] {
-    background-color: transparent;
-    border: none;
-}
-
-/* VBox/HBox layout widget wrappers */
-QVBoxLayout, QHBoxLayout {
-  background-color: transparent;
-    border: none;
-    outline: none;
-}
-
-/* Label transparency */
-QLabel {
-    background-color: transparent;
-    border: none;
-}
-
-QFormLayout QLabel,
-QDialog QLabel {
+QTreeWidget::viewport {
     background-color: transparent;
 }

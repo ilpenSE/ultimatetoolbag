@@ -44,4 +44,5 @@
     /* Tree Widget Item hover */
     --tree-item-hover-bg: rgba(0, 0, 0, 0.05);
     --tree-item-hover-border: rgba(0, 0, 0, 0.08);
+    --stack-bg: #f6f6f6;
 }
