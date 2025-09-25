@@ -15,6 +15,7 @@ class LanguageManager : public QObject {
     return _instance;
   }
 
+  static const QList<Language> orderedLanguages;
   static const QHash<Language, QString> languageToLocaleMap;
   static const QHash<QString, Language> localeToLanguageMap;
 

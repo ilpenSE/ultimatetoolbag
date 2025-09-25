@@ -35,6 +35,7 @@ bool FavoritesManager::ensureFavs() {
 
   QJsonArray filtered;
   for (const auto& v : std::as_const(loadedarr)) {
+    if (!v.isString()) continue;
     QString key = v.toString();
     if (alltools.contains(key)) {
       filtered.append(key);

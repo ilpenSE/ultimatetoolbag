@@ -24,7 +24,9 @@ class ThemeManager : public QObject {
   }
 
   // functions
-  bool applyTheme(const QString& visibleName);
+  bool applyTheme(const QString& fileName);
+  bool refreshTheme(const QString& fileName);
+  QString getAllQss();
   QStringList availableThemes() const;
   QString themesDirPath() const;
   QString themesJsonPath() const;
@@ -34,7 +36,7 @@ class ThemeManager : public QObject {
   QString getFileName(const QString& visibleName);
   QPixmap coloredPixmap(const QString& svgPath, const QColor& color,
                         const QSize& size = QSize(32, 32));
-  void resolveVars(QString* qssContent) const;
+  void resolveVars(QString* qssContent);
 
   // New dynamic icon functions
   QIcon createDynamicIcon(const QString& svgPath,
@@ -62,6 +64,7 @@ class ThemeManager : public QObject {
   void updateIconColors();
 
  private:
+  QString allQss;
   QString globalQss;
   QString readQssFile(const QString& filePath) const;
   explicit ThemeManager(QObject* parent = nullptr);

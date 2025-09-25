@@ -5,9 +5,10 @@
 #include <QStack>
 #include <QWidget>
 #include <QJsonObject>
-#include "../skeleton/toastmanager.h"
+#include "skeleton/toastmanager.h"
 #include <QToolButton>
 #include <QTreeWidget>
+#include <QCoreApplication>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,6 +22,14 @@ class MainWindow : public QMainWindow {
  public:
   MainWindow(const QJsonObject& settings, bool updateAvailable, QWidget *parent = nullptr);
   ~MainWindow();
+
+  static const QString sftr(const QString& key) {
+    if (key.isEmpty()) return key;
+    QByteArray utf8 = key.toUtf8();
+    const char* src = utf8.constData();
+    const char* ctx = "MainWindow";
+    return QCoreApplication::translate(ctx, src);
+  }
 
   static QTreeWidget* createTree(QWidget* parent = nullptr) {
     QTreeWidget* tree = new QTreeWidget(parent);
@@ -40,7 +49,7 @@ class MainWindow : public QMainWindow {
   }
 
  private slots:
-  void onAddToFavorites(const QString& itemName);
+  bool onAddToFavorites(const QString& itemName);
   void onThemeChanged();
 
   void on_backBtn_clicked();
@@ -51,13 +60,39 @@ class MainWindow : public QMainWindow {
 
   void on_searchBox_textChanged(const QString &arg1);
 
+  void on_actionSettings_triggered();
+
  private:
+  /*
+   * TOOLS STACK
+   *  -> grPage
+   *  -> favPage
+   *  -> searchPage
+   *  -> (page 1)
+   *    -> VBoxLayout
+   *      ->TreeWidget
+   *        -> qtreewidgetitem
+   *          -> itemwidget
+   *            -> item layout (hbox)
+   *              -> qlabel
+   *              -> icon (opt)
+   *        -> item 2
+   */
   // initalize side panel
   void initTree();
   QWidget* createGroupEntriesPage(const QString& groupName);
   QWidget* createFavoritesPage(const QJsonArray& favs);
   void slideTransition(QWidget* oldPage, QWidget* newPage, bool reverse = false);
   void loadFavs();
+  void connectItemClicks(QTreeWidgetItem* it, QTreeWidget* tree);
+  void openToolTab(const QString& toolName);
+
+  // LRU
+  QList<QString> pageOrder;
+  QHash<QString, QWidget*> pageCache;
+  const int maxCacheSize = 3;
+  QHash<QString, QTreeWidgetItem*> favItems; // tool key name: item
+  QStringList translatedTools;
 
   // search bar with delay
   void loadSearchPage();
@@ -67,13 +102,16 @@ class MainWindow : public QMainWindow {
   void performSearch();
 
   // hiddendata: name, visible: tr(name)
-  void addItemToTree(QTreeWidget* tree, const QString& name, TreeItemType btntype = TreeItemType::NONE);
+  QTreeWidgetItem* addItemToTree(QTreeWidget* tree, const QString& name, TreeItemType btntype = TreeItemType::NONE);
+  void retranslateItem(QTreeWidget* tree, const QString& keyName);
 
   // dynamic icons
   void setupDynamicIcons();
   void refreshIcons();
 
   void retranslateUi();
+  void retranslatePage(QWidget* page, const QStringList& keys);
+  void retranslatePageCache();
 
   // segments of ctor
   void initializeUi();
@@ -82,6 +120,8 @@ class MainWindow : public QMainWindow {
 
   bool m_isClosing = false;
   bool settingsHasChanges = false;
+
+  QStringList m_groups;
 
   int SLIDE_ANIM_DUR;
   static const QString iconsPath;

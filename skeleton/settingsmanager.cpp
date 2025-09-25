@@ -10,8 +10,14 @@
 
 const Language SettingsManager::defaultLanguage = Language::ENGLISH;
 const QString SettingsManager::defaultLanguageStr = "en_US";
-const QString SettingsManager::defaultTheme = "dark";
+const QString SettingsManager::defaultTheme = "singularity";
 const int SettingsManager::defaultSlideAnim = 200;
+
+const QStringList SettingsManager::changableSettings = {
+    "Language",
+    "Theme",
+    "SlideAnimation"
+};
 
 static bool isInteger(const QJsonValue& value) {
   if (!value.isDouble()) return false;

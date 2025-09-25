@@ -20,6 +20,10 @@
         <translation>Hakkında</translation>
     </message>
     <message>
+        <source>Working</source>
+        <translation>Çalışıyor...</translation>
+    </message>
+    <message>
         <source>Edit Groups</source>
         <translation>Grupları Düzenle</translation>
     </message>
@@ -154,6 +158,128 @@
     <message>
         <source>%1 removed from favorites</source>
         <translation>%1 favorilerden kaldırıldı</translation>
+    </message>
+    <message>
+        <source>Fluent Dark</source>
+        <translation>Fluent Koyu</translation>
+    </message>
+    <message>
+        <source>Fluent Light</source>
+        <translation>Fluent Açık</translation>
+    </message>
+    <message>
+        <source>Synthwave</source>
+        <translation>Synthwave</translation>
+    </message>
+    <message>
+        <source>Singularity</source>
+        <translation>Tekillik</translation>
+    </message>
+    <message>
+        <source>Theme %1 couldn&apos;t be loaded! Changing it to Fluent Dark...</source>
+        <translation>Tema %1 yüklenemedi! Fluent Koyu temasına geçiliyor...</translation>
+    </message>
+    <message>
+        <source>Fluent Dark theme couldn&apos;t be loaded.</source>
+        <translation>Fluent Koyu teması yüklenemedi.</translation>
+    </message>
+    <message>
+        <source>Successfully changed theme to Fluent Dark</source>
+        <translation>Tema başarıyla Fluent Koyu olarak değiştirildi</translation>
+    </message>
+    <message>
+        <source>Successfully changed theme to %1</source>
+        <translation>Tema başarıyla %1 olarak değiştirildi</translation>
+    </message>
+    <message>
+        <source>Language %1 couldn&apos;t be loaded! Changing it to English...</source>
+        <translation>Dil %1 yüklenemedi! İngilizceye geçiliyor...</translation>
+    </message>
+    <message>
+        <source>English couldn&apos;t be loaded.</source>
+        <translation>İngilizce yüklenemedi.</translation>
+    </message>
+    <message>
+        <source>Successfully changed language to English</source>
+        <translation>Dil başarıyla İngilizce olarak değiştirildi</translation>
+    </message>
+    <message>
+        <source>Successfully changed language to %1</source>
+        <translation>Dil başarıyla %1 olarak değiştirildi</translation>
+    </message>
+    <message>
+        <source>Search a tool</source>
+        <translation>Bir araç ara</translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation>Lütfen bekleyin...</translation>
+    </message>
+</context>
+<context>
+    <name>AboutDialog</name>
+    <message>
+        <source>Version</source>
+        <translation>Sürüm</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Yapımcı</translation>
+    </message>
+    <message>
+        <source>Built with Qt (Free Edition)</source>
+        <translation>Qt (ücretsiz sürümü) ile oluşturuldu</translation>
+    </message>
+    <message>
+        <source>This application uses the Qt framework (LGPLv3). Qt is a free and open-source project by The Qt Company and contributors.</source>
+        <translation>Bu uygulama Qt framework (LGPLv3) kullanıyor. Qt, The Qt Company ve destekçilerinin geliştirdiği ücretsiz ve açık kaynak bir projedir.</translation>
+    </message>
+    <message>
+        <source>Made in Türkiye</source>
+        <translation>Türkiye&apos;de Yapıldı</translation>
+    </message>
+    <message>
+        <source>Links</source>
+        <translation>Bağlantılar</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsWin</name>
+    <message>
+        <source>Save</source>
+        <translation>Kaydet</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation>Tema</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Dil</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Diğer</translation>
+    </message>
+    <message>
+        <source>Patch Notes</source>
+        <translation>Yama Notları</translation>
+    </message>
+    <message>
+        <source>Slide Animation Duration</source>
+        <translation>Kayma Animasyonu Süresi</translation>
+    </message>
+    <message>
+        <source>Determines how long will navigator slides in milliseconds</source>
+        <translation>Navigator&apos;ın ne kadar milisaniye kayacağını belirler</translation>
+    </message>
+    <message>
+        <source>Refreshes the current theme</source>
+        <translation>Şu anki temayı yeniden yükler</translation>
     </message>
 </context>
 </TS>

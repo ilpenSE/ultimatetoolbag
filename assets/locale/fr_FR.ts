@@ -20,6 +20,10 @@
         <translation>À propos</translation>
     </message>
     <message>
+        <source>Working</source>
+        <translation>En cours...</translation>
+    </message>
+    <message>
         <source>Edit Groups</source>
         <translation>Modifier les groupes</translation>
     </message>
@@ -154,6 +158,128 @@
     <message>
         <source>%1 removed from favorites</source>
         <translation>%1 retiré des favoris</translation>
+    </message>
+    <message>
+        <source>Fluent Dark</source>
+        <translation>Fluent Sombre</translation>
+    </message>
+    <message>
+        <source>Fluent Light</source>
+        <translation>Fluent Clair</translation>
+    </message>
+    <message>
+        <source>Synthwave</source>
+        <translation>Synthwave</translation>
+    </message>
+    <message>
+        <source>Singularity</source>
+        <translation>Singularité</translation>
+    </message>
+    <message>
+        <source>Theme %1 couldn&apos;t be loaded! Changing it to Fluent Dark...</source>
+        <translation>Le thème %1 n&apos;a pas pu être chargé ! Passage à Fluent Dark...</translation>
+    </message>
+    <message>
+        <source>Fluent Dark theme couldn&apos;t be loaded.</source>
+        <translation>Le thème Fluent Dark n&apos;a pas pu être chargé.</translation>
+    </message>
+    <message>
+        <source>Successfully changed theme to Fluent Dark</source>
+        <translation>Thème changé avec succès en Fluent Dark</translation>
+    </message>
+    <message>
+        <source>Successfully changed theme to %1</source>
+        <translation>Thème changé avec succès en %1</translation>
+    </message>
+    <message>
+        <source>Language %1 couldn&apos;t be loaded! Changing it to English...</source>
+        <translation>La langue %1 n&apos;a pas pu être chargée ! Passage à l&apos;anglais...</translation>
+    </message>
+    <message>
+        <source>English couldn&apos;t be loaded.</source>
+        <translation>L&apos;anglais n&apos;a pas pu être chargé.</translation>
+    </message>
+    <message>
+        <source>Successfully changed language to English</source>
+        <translation>Langue changée avec succès en anglais</translation>
+    </message>
+    <message>
+        <source>Successfully changed language to %1</source>
+        <translation>Langue changée avec succès en %1</translation>
+    </message>
+    <message>
+        <source>Search a tool</source>
+        <translation>Rechercher un outil</translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation>Veuillez patienter...</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsWin</name>
+    <message>
+        <source>Save</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation>Thème</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Langue</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Autre</translation>
+    </message>
+    <message>
+        <source>Patch Notes</source>
+        <translation>Notes de mise à jour</translation>
+    </message>
+    <message>
+        <source>Slide Animation Duration</source>
+        <translation>Durée de l&apos;animation de glissement</translation>
+    </message>
+    <message>
+        <source>Determines how long will navigator slides in milliseconds</source>
+        <translation>Détermine la durée des diapositives du navigateur en millisecondes</translation>
+    </message>
+    <message>
+        <source>Refreshes the current theme</source>
+        <translation>Recharge le thème actuel</translation>
+    </message>
+</context>
+<context>
+    <name>AboutDialog</name>
+    <message>
+        <source>Version</source>
+        <translation>Version</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Auteur</translation>
+    </message>
+    <message>
+        <source>Built with Qt (Free Edition)</source>
+        <translation>Construit avec Qt (Édition gratuite)</translation>
+    </message>
+    <message>
+        <source>This application uses the Qt framework (LGPLv3). Qt is a free and open-source project by The Qt Company and contributors.</source>
+        <translation>Cette application utilise le framework Qt (LGPLv3). Qt est un projet gratuit et open-source de The Qt Company et des contributeurs.</translation>
+    </message>
+    <message>
+        <source>Made in Türkiye</source>
+        <translation>Fabriqué en Turquie</translation>
+    </message>
+    <message>
+        <source>Links</source>
+        <translation>Liens</translation>
     </message>
 </context>
 </TS>

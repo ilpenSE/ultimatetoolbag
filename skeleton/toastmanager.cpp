@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QEasingCurve>
 #include "../etc/enums.h"
+#include "../etc/apptranslations.h"
 
 ToastWidget::ToastWidget(const QString& message, ToastType type, QWidget* parent)
     : QLabel(parent), fadeAnimation(nullptr), autoCloseTimer(new QTimer(this))

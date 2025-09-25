@@ -9,7 +9,7 @@
 #include "etc/instances.h"
 #include "skeleton/languagemanager.h"
 #include "skeleton/logger.h"
-#include "forms/mainwindow.h"
+#include "mainwindow.h"
 #include "skeleton/settingsmanager.h"
 #include "skeleton/thememanager.h"
 #include "skeleton/versionmanager.h"
@@ -18,6 +18,9 @@ int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
   app.setApplicationName("UltimateToolbag");
   app.setOrganizationName("ilpeNdev");
+
+  // set icon
+  QApplication::setWindowIcon(QIcon(":/assets/icons/appicon.svg"));
 
   // logger and version manager init
   _verman.initVer(APP_VERSION);
@@ -101,52 +104,24 @@ int main(int argc, char *argv[]) {
 
   // themes init
   QString themesPath = _forg.appFolderPath() + "/themes.json";
-
-  bool themesOk = false;
-  QJsonObject themes = _settingsman.loadSettings(themesPath, themesOk);
-
-  if (!themesOk) {
-    // create default themes.json
-    QJsonObject defaults;
-    defaults["dark"] = "Fluent Dark";
-    defaults["light"] = "Fluent Light";
-
-    if (!_forg.saveJson(themesPath, defaults)) {
-      fscrit << "Themes.json saving failed while creating";
-      QMessageBox::critical(nullptr, "Fatal Error", "Themes.json saving failed while creating");
-      return -1;
-    }
-    fswrn << "Themes file was deleted or corrupted, created one.";
-    themes = defaults;
-  } else {
-    // add missing keys
-    bool needsUpdate = false;
-    if (!themes.contains("dark")) {
-      themes["dark"] = "Fluent Dark";
-      needsUpdate = true;
-    }
-    if (!themes.contains("light")) {
-      themes["light"] = "Fluent Light";
-      needsUpdate = true;
-    }
-
-    if (needsUpdate) {
-      if (!_forg.saveJson(themesPath, themes)) {
-        fscrit << "Themes.json saving failed after updating";
-        QMessageBox::critical(nullptr, "Fatal Error", "Themes.json saving failed after updating");
-        return -1;
-      }
-    }
+  QString themeErrorM;
+  if (!_forg.ensureThemesJson(themesPath, &themeErrorM)) {
+    thcrit << "Error while ensuring themes.json: " + themeErrorM;
+    QMessageBox::critical(nullptr, "Fatal Error", themeErrorM);
+    return -1;
   }
 
   // load the theme
   QString theme = settings["Theme"].toString(_settingsman.defaultTheme);
-  if (!_themesman.applyTheme(_themesman.getVisibleName(theme))) {
-    thcrit << "Theme couldn't be loaded, file name: " << theme
-            << " visible name: "
-            << _themesman.getVisibleName(theme);
-    QMessageBox::critical(nullptr, "Fatal Error", "Theme couldn't be loaded.");
-    return -1;
+  if (!_themesman.applyTheme(theme)) {
+    // fallback: retry as dark
+    if (!_themesman.applyTheme("dark")) {
+      thcrit << "Theme couldn't be loaded, file name: " << theme
+             << " visible name: "
+             << _themesman.getVisibleName(theme);
+      QMessageBox::critical(nullptr, "Fatal Error", "Theme couldn't be loaded.");
+      return -1;
+    }
   }
 
   // load favs.json
@@ -164,6 +139,7 @@ int main(int argc, char *argv[]) {
                    });
 
   MainWindow w(settings, appUpdateAvailable);
+  w.setWindowIcon(QIcon(":/assets/icons/appicon.svg"));
   w.show();
   return app.exec();
 }

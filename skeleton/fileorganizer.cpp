@@ -131,6 +131,42 @@ QString FileOrganizer::assetUrl(const QString& relativePath) {
       .arg(GITHUB_USER, GITHUB_REPO, EXTERNAL_ASSETS_BRANCH, APP_VERSION, relativePath);
 }
 
+bool FileOrganizer::ensureThemesJson(const QString& themesPath, QString* error) {
+  bool themesOk = false;
+  QJsonObject themes = _settingsman.loadSettings(themesPath, themesOk);
+
+  if (!themesOk) {
+    if (!_forg.saveJson(themesPath, defaultThemesObj)) {
+      fscrit << "Themes.json saving failed while creating";
+      if (error) *error = "Themes.json saving failed while creating";
+      return false;
+    }
+    fswrn << "Themes file was deleted or corrupted, created one.";
+    themes = defaultThemesObj;
+  } else {
+    // add missing keys
+    bool needsUpdate = false;
+    for (auto it = defaultThemesObj.begin(); it != defaultThemesObj.end(); ++it) {
+      if (!themes.contains(it.key())) {
+        themes[it.key()] = it.value();
+        thwrn << "The key " + it.key() + " cannot be found, adding it";
+        needsUpdate = true;
+      }
+    }
+
+    if (needsUpdate) {
+      if (!_forg.saveJson(themesPath, themes)) {
+        fscrit << "Themes.json saving failed after updating";
+        if (error) *error = "Themes.json saving failed after updating";
+        return false;
+      }
+    }
+  }
+
+  fsinfo << "Themes.json validated successfully!";
+  return true;
+}
+
 bool FileOrganizer::downloadAsset(const QString& relpath) {
   QString downloadUrl = assetUrl(relpath);
 
@@ -226,7 +262,7 @@ bool FileOrganizer::assetExists(const QString& relpath) {
 
 bool FileOrganizer::ensureDefaultAssets() {
   // create if not exists
-  QStringList assets = { "themes/dark.qss", "themes/light.qss", "patchnotes.md" };
+  QStringList assets = { "themes/dark.qss", "themes/singularity.qss", "themes/synthwave.qss", "themes/light.qss", "patchnotes.md" };
   for (const QString& a : std::as_const(assets)) {
     if (!assetExists(a)) downloadAsset(a);
   }
@@ -239,6 +275,7 @@ bool FileOrganizer::ensureDefaultAssets() {
     return true;
   }
 
+  // FIXME: patchnotes.md downloading every single time if there's exactly same as local
   for (const QString& rpath : std::as_const(downloadAssets)) {
     fsinfo << "New version of " + rpath + " found, downloading...";
     if (!downloadAsset(rpath)) {

@@ -7,6 +7,8 @@
 #include <QJsonDocument>
 #include <QObject>
 #include <QStandardPaths>
+#include <QJsonObject>
+
 /*
  * singleton yapısı, normal classlardan farkı bu, program boyunca çalışır
  * ve aşağıdaki ayarlar sayesinde kopyalanamaz. Sadece 1 tane vardır.
@@ -33,6 +35,8 @@ class FileOrganizer : public QObject {
   bool createSettingsFile();
   bool fixSettingsFile();
 
+  bool ensureThemesJson(const QString& filepath, QString* erro = nullptr);
+
   // assets
   QString assetUrl(const QString& relativePath);
   bool ensureDefaultAssets();
@@ -50,9 +54,17 @@ class FileOrganizer : public QObject {
   bool downloadAsset(const QString& relpath);
 
  private:
-  explicit FileOrganizer(QObject* parent = nullptr) : QObject(parent) {}
+  explicit FileOrganizer(QObject* parent = nullptr) : QObject(parent) {
+    defaultThemesObj = {
+        {"dark", "Fluent Dark"},
+        {"light", "Fluent Light"},
+        {"synthwave", "Synthwave"},
+        {"singularity", "Singularity"}
+    };
+  }
 
   QString m_patchnotesmd;
+  QJsonObject defaultThemesObj;
 
   // block copy and assign
   FileOrganizer(const FileOrganizer&) = delete;

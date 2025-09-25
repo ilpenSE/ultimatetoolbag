@@ -14,6 +14,12 @@ const QHash<Language, QString> LanguageManager::languageToLocaleMap = {
     {Language::ITALIAN, "it_IT"}, {Language::SPANISH, "es_ES"},
     {Language::RUSSIAN, "ru_RU"}};
 
+const QList<Language> LanguageManager::orderedLanguages = {
+    Language::ENGLISH, Language::TURKISH, Language::GERMAN,
+    Language::FRENCH, Language::ITALIAN, Language::SPANISH,
+    Language::RUSSIAN
+};
+
 const QHash<QString, Language> LanguageManager::localeToLanguageMap = {
     {"en_US", Language::ENGLISH}, {"tr_TR", Language::TURKISH},
     {"de_DE", Language::GERMAN},  {"fr_FR", Language::FRENCH},

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Ultimate Toolbag
+Comment=Powerful development tools collection
+Exec=/usr/local/bin/ultimate-toolbag
+Icon=ultimate-toolbag
+Terminal=false
+Categories=Development;Utility;

@@ -20,6 +20,10 @@
         <translation>About</translation>
     </message>
     <message>
+        <source>Working</source>
+        <translation>Working...</translation>
+    </message>
+    <message>
         <source>Edit Groups</source>
         <translation>Edit Groups</translation>
     </message>
@@ -154,6 +158,128 @@
     <message>
         <source>%1 removed from favorites</source>
         <translation>%1 removed from favorites</translation>
+    </message>
+    <message>
+        <source>Fluent Dark</source>
+        <translation>Fluent Dark</translation>
+    </message>
+    <message>
+        <source>Fluent Light</source>
+        <translation>Fluent Light</translation>
+    </message>
+    <message>
+        <source>Synthwave</source>
+        <translation>Synthwave</translation>
+    </message>
+    <message>
+        <source>Singularity</source>
+        <translation>Singularity</translation>
+    </message>
+    <message>
+        <source>Theme %1 couldn&apos;t be loaded! Changing it to Fluent Dark...</source>
+        <translation>Theme %1 couldn&apos;t be loaded! Changing it to Fluent Dark...</translation>
+    </message>
+    <message>
+        <source>Fluent Dark theme couldn&apos;t be loaded.</source>
+        <translation>Fluent Dark theme couldn&apos;t be loaded.</translation>
+    </message>
+    <message>
+        <source>Successfully changed theme to Fluent Dark</source>
+        <translation>Successfully changed theme to Fluent Dark</translation>
+    </message>
+    <message>
+        <source>Successfully changed theme to %1</source>
+        <translation>Successfully changed theme to %1</translation>
+    </message>
+    <message>
+        <source>Language %1 couldn&apos;t be loaded! Changing it to English...</source>
+        <translation>Language %1 couldn&apos;t be loaded! Changing it to English...</translation>
+    </message>
+    <message>
+        <source>English couldn&apos;t be loaded.</source>
+        <translation>English couldn&apos;t be loaded.</translation>
+    </message>
+    <message>
+        <source>Successfully changed language to English</source>
+        <translation>Successfully changed language to English</translation>
+    </message>
+    <message>
+        <source>Successfully changed language to %1</source>
+        <translation>Successfully changed language to %1</translation>
+    </message>
+    <message>
+        <source>Search a tool</source>
+        <translation>Search a tool</translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation>Please wait...</translation>
+    </message>
+</context>
+<context>
+    <name>AboutDialog</name>
+    <message>
+        <source>Version</source>
+        <translation>Version</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Author</translation>
+    </message>
+    <message>
+        <source>Built with Qt (Free Edition)</source>
+        <translation>Built with Qt (Free Edition)</translation>
+    </message>
+    <message>
+        <source>This application uses the Qt framework (LGPLv3). Qt is a free and open-source project by The Qt Company and contributors.</source>
+        <translation>This application uses the Qt framework (LGPLv3). Qt is a free and open-source project by The Qt Company and contributors.</translation>
+    </message>
+    <message>
+        <source>Made in Türkiye</source>
+        <translation>Made in Türkiye</translation>
+    </message>
+    <message>
+        <source>Links</source>
+        <translation>Links</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsWin</name>
+    <message>
+        <source>Save</source>
+        <translation>Save</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation>Tema</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Dil</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation>Other</translation>
+    </message>
+    <message>
+        <source>Patch Notes</source>
+        <translation>Patch Notes</translation>
+    </message>
+    <message>
+        <source>Slide Animation Duration</source>
+        <translation>Slide Animation Duration</translation>
+    </message>
+    <message>
+        <source>Determines how long will navigator slides in milliseconds</source>
+        <translation>Determines how long will navigator slides in milliseconds</translation>
+    </message>
+    <message>
+        <source>Refreshes the current theme</source>
+        <translation>Refreshes the current theme</translation>
     </message>
 </context>
 </TS>

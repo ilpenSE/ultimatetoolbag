@@ -20,19 +20,19 @@ QPushButton {
 }
 
 QPushButton:hover {
-    background-color: #3c3c41;
+    background-color: var(--border-secondary);
     border-color: var(--border-secondary);
 }
 
 QPushButton:pressed {
-    background-color: #484848;
-    border-color: #606060;
+    background-color: var(--text-disabled);
+    border-color: var(--border-secondary);
 }
 
 QPushButton:disabled {
-    background-color: #1a1a1a;
+    background-color: var(--primary-bg);
     color: var(--text-disabled);
-    border-color: #2a2a2a;
+    border-color: var(--border-primary);
 }
 
 /* Icon-only buttons */
@@ -88,9 +88,9 @@ QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
 }
 
 QLineEdit:disabled, QTextEdit:disabled, QPlainTextEdit:disabled {
-    background-color: #1a1a1a;
+    background-color: var(--primary-bg);
     color: var(--text-disabled);
-    border-color: #2a2a2a;
+    border-color: var(--border-primary);
 }
 
 QSpinBox {
@@ -119,8 +119,8 @@ QComboBox {
 
 QTableWidget QComboBox:disabled {
     border-radius: 2px;
-    color: #8b8b8b;
-    background-color: #3c3c3c;
+    color: var(--text-secondary);
+    background-color: var(--secondary-bg);
 }
 
 QTableWidget QComboBox {
@@ -291,11 +291,11 @@ QMenuBar::item {
 }
 
 QMenuBar::item:selected {
-    background-color: #3c3c41;
+    background-color: var(--border-secondary);
 }
 
 QMenuBar::item:pressed {
-    background-color: #484848;
+    background-color: var(--text-disabled);
 }
 
 /* Menu */
@@ -313,7 +313,7 @@ QMenu::item {
 }
 
 QMenu::item:selected {
-    background-color: #3c3c41;
+    background-color: var(--border-secondary);
 }
 
 QMenu::separator {
@@ -339,11 +339,11 @@ QToolButton {
 }
 
 QToolButton:hover {
-    background-color: #3c3c41;
+    background-color: var(--border-secondary);
 }
 
 QToolButton:pressed {
-    background-color: #484848;
+    background-color: var(--text-disabled);
 }
 
 /* Status Bar */
@@ -377,7 +377,7 @@ QTabBar::tab:selected {
 }
 
 QTabBar::tab:hover:!selected {
-    background-color: #3c3c41;
+    background-color: var(--border-secondary);
 }
 
 /* Scroll Bar */
@@ -439,7 +439,7 @@ QGroupBox::title {
     background-color: var(--primary-bg);
 }
 
-/* List Widget - QTableWidget için de eklenecek */
+/* List/Table Widget */
 QListWidget, QTableWidget {
     background-color: var(--secondary-bg);
     border: 1px solid var(--border-primary);
@@ -456,7 +456,7 @@ QListWidget::item, QTableWidget::item {
 }
 
 QListWidget::item:hover, QTableWidget::item:hover {
-    background-color: #3c3c41;
+    background-color: var(--border-secondary);
 }
 
 QListWidget::item:selected, QTableWidget::item:selected {
@@ -466,10 +466,10 @@ QListWidget::item:selected, QTableWidget::item:selected {
 }
 
 QTableWidget QLineEdit {
-    background-color: #000000;
+    background-color: var(--text-primary);
     border: 2px solid var(--accent-color);
     border-radius: 2px;
-    color: #000000;
+    color: var(--primary-bg);
     padding: 2px 4px;
     margin: 0px;
     font-size: 9pt;
@@ -481,7 +481,7 @@ QTableWidget QLineEdit:focus {
     border-color: var(--accent-pressed);
     border-width: 2px;
     border-radius: 2px;
-    background-color: #dbdbdb;
+    background-color: var(--text-secondary);
 }
 
 /* QTableWidget specific ComboBox styling */
@@ -536,7 +536,7 @@ QTableWidget QPushButton {
 }
 
 QTableWidget QPushButton:hover {
-    background-color: #3c3c41;
+    background-color: var(--border-secondary);
     border-color: var(--border-secondary);
 }
 
@@ -573,7 +573,7 @@ QHeaderView::section {
 }
 
 QHeaderView::section:hover {
-    background-color: #3c3c41;
+    background-color: var(--border-secondary);
 }
 
 /* Side Panel Layout Fixes */
@@ -607,7 +607,7 @@ QWidget[objectName="sidePanel"] {
     border-right: 1px solid var(--border-primary);
 }
 
-/* Modern Tree Widget - CLEANED UP */
+/* Modern Tree Widget */
 QTreeWidget {
     background-color: var(--secondary-bg);
     border: none;
@@ -637,13 +637,13 @@ QTreeWidget QWidget {
 }
 
 QTreeWidget::item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: var(--tree-item-hover-bg);
+    border: 1px solid var(--tree-item-hover-border);
 }
 
 QTreeWidget::item:selected {
     background-color: var(--accent-color);
-    color: #ffffff;
+    color: var(--text-primary);
     border: 1px solid var(--accent-hover);
 }
 
@@ -685,8 +685,8 @@ QSplitter::handle:vertical {
 
 /* Tooltip */
 QToolTip {
-    background-color: #404040;
-    border: 1px solid #606060;
+    background-color: var(--tertiary-bg);
+    border: 1px solid var(--border-secondary);
     border-radius: 4px;
     color: var(--text-primary);
     padding: 4px 8px;
@@ -715,4 +715,26 @@ QLabel[statusType="error"] {
 
 QLabel[statusType="info"] {
     color: var(--info-color);
+}
+
+/* Label transparency fix */
+QLabel {
+    background-color: transparent;
+    border: none;
+}
+
+/* Form labels specifically */
+QFormLayout QLabel {
+    background-color: transparent;
+}
+
+/* Dialog labels */
+QDialog QLabel {
+    background-color: transparent;
+}
+
+QStackedWidget {
+    background: var(--stack-bg);
+    border: none;
+    outline: none;
 }

@@ -15,9 +15,8 @@ class AboutDialog : public QDialog {
   ~AboutDialog();
 
  private:
+  QString createLocalizedAboutText();
   Ui::AboutDialog *ui;
-
-  QString trans(const QString& k);
 };
 
 #endif  // ABOUTDIALOG_H

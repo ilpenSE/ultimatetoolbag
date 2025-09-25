@@ -12,5 +12,7 @@
         <file>assets/icons/fav.svg</file>
         <file>assets/icons/faved.svg</file>
         <file>assets/icons/back.svg</file>
+        <file>assets/icons/appicon.svg</file>
+        <file>assets/icons/refresh.svg</file>
     </qresource>
 </RCC>

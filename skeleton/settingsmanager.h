@@ -9,7 +9,6 @@
 #include "../etc/enums.h"
 #include "../etc/consts.h"
 #include "languagemanager.h"
-#include "versionmanager.h"
 
 class SettingsManager : public QObject {
   Q_OBJECT
@@ -30,6 +29,9 @@ class SettingsManager : public QObject {
     return obj;
   }
 
+  // değiştirilebilir ayarlar
+  static const QStringList changableSettings;
+
   static const Language defaultLanguage;
   static const QString defaultLanguageStr;
   static const QString defaultTheme;
@@ -41,7 +43,7 @@ class SettingsManager : public QObject {
 
  private:
   const QStringList supportedLanguages = LanguageManager::localeToLanguageMap.keys();
-  const QStringList supportedThemes = { "dark", "light" };
+  const QStringList supportedThemes = { "dark", "light", "singularity", "synthwave" };
 
   explicit SettingsManager(QObject* parent = nullptr) : QObject(parent) {}
 

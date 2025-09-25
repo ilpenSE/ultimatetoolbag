@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>Ultimate Toolbag</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/assets/icons/app_icon.svg</normaloff>:/assets/icons/app_icon.svg</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
@@ -95,6 +91,9 @@
         <layout class="QHBoxLayout" name="headerLayout">
          <item>
           <widget class="QLineEdit" name="searchBox">
+           <property name="toolTip">
+            <string>Search a tool</string>
+           </property>
            <property name="placeholderText">
             <string>Search</string>
            </property>
@@ -114,9 +113,24 @@
        </item>
        <item>
         <widget class="QStackedWidget" name="toolsStack">
-         <widget class="QWidget" name="grPage"/>
-         <widget class="QWidget" name="favPage"/>
-         <widget class="QWidget" name="searchPage"/>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <widget class="QWidget" name="grPage">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+         </widget>
+         <widget class="QWidget" name="favPage">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+         </widget>
+         <widget class="QWidget" name="searchPage">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -224,6 +238,9 @@
    <property name="toolTip">
     <string>App settings</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
+   </property>
   </action>
   <action name="actionManageGroups">
    <property name="text">
@@ -231,6 +248,9 @@
    </property>
    <property name="toolTip">
     <string>Edit tool groups name</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -240,6 +260,9 @@
    <property name="toolTip">
     <string>About the app</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
   </action>
   <action name="actionAccount">
    <property name="text">
@@ -247,6 +270,9 @@
    </property>
    <property name="toolTip">
     <string>Account information</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
  </widget>

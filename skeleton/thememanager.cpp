@@ -50,7 +50,7 @@ QString ThemeManager::readQssFile(const QString& filePath) const {
   return QString::fromUtf8(file.readAll());
 }
 
-void ThemeManager::resolveVars(QString* qssContent) const {
+void ThemeManager::resolveVars(QString* qssContent) {
   if (!qssContent) return;
 
   QString& qss = *qssContent;
@@ -73,7 +73,6 @@ void ThemeManager::resolveVars(QString* qssContent) const {
       QString key = match.captured(1).trimmed();
       QString value = match.captured(2).trimmed();
       varMap[key] = value;
-
       thinfo << QString("CSS Variable parsed: --%1: %2").arg(key, value);
     }
   }
@@ -309,14 +308,13 @@ void ThemeManager::parseThemeColors(const QString& qssContent) {
                   .arg(m_iconColor.name(), m_hoverColor.name(), m_pressedColor.name(), m_disabledColor.name());
 }
 
-bool ThemeManager::applyTheme(const QString& visibleName) {
-  if (!themeMap.contains(visibleName)) {
-    therr << "Theme not found: " + visibleName;
+bool ThemeManager::applyTheme(const QString& fileName) {
+  if (!reversedThemeMap.contains(fileName)) {
+    therr << "Theme not found: " + fileName;
     return false;
   }
 
-  QString qssFileName = themeMap[visibleName];
-  QString filePath = themesDirPath() + "/" + qssFileName + ".qss";
+  QString filePath = themesDirPath() + "/" + fileName + ".qss";
   if (!QFile::exists(filePath)) {
     fserr << "Theme file cannot be found: " + filePath;
     return false;
@@ -335,14 +333,20 @@ bool ThemeManager::applyTheme(const QString& visibleName) {
   // Parse theme colors before applying
   parseThemeColors(mergedQss);
 
+  allQss = mergedQss;
+
   qApp->setStyleSheet(mergedQss);
-  thinfo << "Theme applied: " + visibleName;
+  thinfo << "Theme applied: " + fileName;
 
   // Update all registered icons
   updateIconColors();
   emit themeChanged();
 
   return true;
+}
+
+QString ThemeManager::getAllQss() {
+  return allQss;
 }
 
 void ThemeManager::updateIconColors() {

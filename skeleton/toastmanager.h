@@ -35,6 +35,7 @@ class ToastManager : public QObject {
 
  public:
   explicit ToastManager(QWidget* parent);
+
   void showToast(const QString& message, ToastType type = ToastType::INFO);
 
  private slots:

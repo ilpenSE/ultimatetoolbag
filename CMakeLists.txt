@@ -38,12 +38,13 @@ set(ICONS
 
 set(PROJECT_SOURCES
         main.cpp
-        forms/mainwindow.cpp
-        forms/mainwindow.h
-        forms/mainwindow.ui
+        mainwindow.cpp
+        mainwindow.h
+        mainwindow.ui
         skeleton/languagemanager.h skeleton/languagemanager.cpp
         skeleton/fileorganizer.h skeleton/fileorganizer.cpp
         etc/consts.h etc/enums.h skeleton/versionmanager.h
+        etc/apptranslations.h
         skeleton/logger.cpp skeleton/logger.h skeleton/loggerstream.h
         skeleton/settingsmanager.h skeleton/settingsmanager.cpp
         skeleton/thememanager.h skeleton/thememanager.cpp
@@ -54,7 +55,9 @@ set(PROJECT_SOURCES
         etc/instances.h
         skeleton/favoritesmanager.h skeleton/favoritesmanager.cpp
         skeleton/toastmanager.h skeleton/toastmanager.cpp
-        forms/aboutdialog.h forms/aboutdialog.cpp forms/aboutdialog.ui
+        aboutdialog.h aboutdialog.cpp aboutdialog.ui
+        settingswin.h settingswin.cpp settingswin.ui
+        lib/generictoolwidget.h lib/generictoolwidget.cpp
         ${TS_FILES}
 )
 
@@ -65,10 +68,17 @@ set(PROJECT_RESOURCES
     assets/global.qss
 )
 
+set(APPICON_SVG "${CMAKE_SOURCE_DIR}/assets/icons/appicon.svg")
+set(APPICON_ICO "${CMAKE_SOURCE_DIR}/assets/icons/appicon.ico")
+set(APPICON_PNG "${CMAKE_SOURCE_DIR}/assets/icons/appicon.png")
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
     qt_add_executable(UltimateToolbag
         MANUAL_FINALIZATION
@@ -106,9 +116,9 @@ target_link_libraries(UltimateToolbag
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Svg
 )
-target_link_libraries(UltimateToolbag PRIVATE Qt6::Core)
-target_link_libraries(UltimateToolbag PRIVATE Qt6::Core)
-target_link_libraries(UltimateToolbag PRIVATE Qt6::Core)
+target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
+target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
+target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER dev.ilpen.UltimateToolbag)
@@ -127,6 +137,20 @@ install(TARGETS UltimateToolbag
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+# App icon
+if(WIN32) # Windows
+    target_sources(${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/app.rc")
+endif()
+
+if(UNIX AND NOT APPLE) # Linux
+    install(FILES "${CMAKE_SOURCE_DIR}/ultimate-toolbag.desktop"
+        DESTINATION share/applications)
+
+    install(FILES "${CMAKE_SOURCE_DIR}/assets/icons/appicon.png"
+            DESTINATION share/icons/hicolor/256x256/apps
+            RENAME ultimate-toolbag.png)
+endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(UltimateToolbag)
