@@ -19,6 +19,14 @@ const QStringList SettingsManager::changableSettings = {
     "SlideAnimation"
 };
 
+const QJsonObject SettingsManager::defaultSettings = {
+    {"Language", defaultLanguageStr},
+    {"FirstRun", true},
+    {"Version", APP_VERSION},
+    {"Theme", defaultTheme},
+    {"SlideAnimation", defaultSlideAnim}
+};
+
 static bool isInteger(const QJsonValue& value) {
   if (!value.isDouble()) return false;
 
@@ -29,11 +37,23 @@ static bool isInteger(const QJsonValue& value) {
 
 bool SettingsManager::validateAndFixSettings(QJsonObject& settingsObj) {
   bool needsUpdate = false;
-  QJsonObject defaults = defaultSettings();
+  needsUpdate |= controlKeys(settingsObj);
+  needsUpdate |= checkversion(settingsObj);
+  needsUpdate |= checklang(settingsObj);
+  needsUpdate |= checktheme(settingsObj);
+  needsUpdate |= checkslideanim(settingsObj);
+
+  sinfo << "Settings validated. NEEDS UPDATE : " << (needsUpdate ? "YES" : "NO");
+  return needsUpdate;
+}
+
+// helpers
+bool SettingsManager::controlKeys(QJsonObject& settingsObj) {
+  bool needsUpdate = false;
 
   // delete undefined keys
   for (auto it = settingsObj.begin(); it != settingsObj.end();) {
-    if (!defaults.contains(it.key())) {
+    if (!defaultSettings.contains(it.key())) {
       swrn << "Undefined key found: " + it.key() + ", deleting it.";
       it = settingsObj.erase(it);
       needsUpdate = true;
@@ -43,7 +63,7 @@ bool SettingsManager::validateAndFixSettings(QJsonObject& settingsObj) {
   }
 
   // add missing keys
-  for (auto it = defaults.begin(); it != defaults.end(); ++it) {
+  for (auto it = defaultSettings.begin(); it != defaultSettings.end(); ++it) {
     if (!settingsObj.contains(it.key())) {
       settingsObj[it.key()] = it.value();
       swrn << "The key " + it.key() + " cannot be found, adding it";
@@ -51,13 +71,17 @@ bool SettingsManager::validateAndFixSettings(QJsonObject& settingsObj) {
     }
   }
 
-  // version control
+  return needsUpdate;
+}
+
+bool SettingsManager::checkversion(QJsonObject& settingsObj) {
+  bool needsUpdate = false;
   if (settingsObj.contains("Version") && settingsObj["Version"].isString()) {
     QString verinfile = settingsObj["Version"].toString();
     if (verinfile != APP_VERSION) {
       settingsObj["Version"] = APP_VERSION;
       swrn << "Updating settings file version from " + verinfile + " to " +
-                    APP_VERSION;
+                  APP_VERSION;
       needsUpdate = true;
     }
   } else {
@@ -65,76 +89,61 @@ bool SettingsManager::validateAndFixSettings(QJsonObject& settingsObj) {
     swrn << "Version not found or invalid, added";
     needsUpdate = true;
   }
+  return needsUpdate;
+}
 
-  // pre-defined defaults
-  QString defLang = defaults["Language"].toString();
-  QString defTheme = defaults["Theme"].toString();
-  int defSlideAnim = defaults["SlideAnimation"].toInt();
+bool SettingsManager::checklang(QJsonObject& settingsObj) {
+  bool needsUpdate = false;
 
-  // language control
   if (settingsObj.contains("Language") && settingsObj["Language"].isString()) {
-    QString langinfile = settingsObj["Language"].toString(defLang);
+    QString langinfile = settingsObj["Language"].toString(defaultLanguageStr);
     if (!supportedLanguages.contains(langinfile)) {
-      settingsObj["Language"] = defLang;
+      settingsObj["Language"] = defaultLanguageStr;
       needsUpdate = true;
-      swrn << QString("Undefined language found (%1), defaulted it to %2").arg(langinfile, defLang);
+      swrn << QString("Undefined language found (%1), defaulted it to %2").arg(langinfile, defaultLanguageStr);
     }
   } else {
-    settingsObj["Language"] = defLang;
+    settingsObj["Language"] = defaultLanguageStr;
     swrn << "Language not found or invalid, added";
     needsUpdate = true;
   }
+  return needsUpdate;
+}
 
-  // theme control
+bool SettingsManager::checktheme(QJsonObject& settingsObj) {
+  bool needsUpdate = false;
+
   if (settingsObj.contains("Theme") && settingsObj["Theme"].isString()) {
-    QString themeinfile = settingsObj["Theme"].toString(defTheme);
+    QString themeinfile = settingsObj["Theme"].toString(defaultTheme);
     if (!supportedThemes.contains(themeinfile)) {
-      settingsObj["Theme"] = defTheme;
+      settingsObj["Theme"] = defaultTheme;
       needsUpdate = true;
-      swrn << QString("Undefined theme found (%1), defaulted it to %2").arg(themeinfile, defTheme);
+      swrn << QString("Undefined theme found (%1), defaulted it to %2").arg(themeinfile, defaultTheme);
     }
   } else {
-    settingsObj["Theme"] = defTheme;
+    settingsObj["Theme"] = defaultTheme;
     swrn << "Theme key not found or invalid, added";
     needsUpdate = true;
   }
 
-  // slide animation control (has to be between 50-2000)
+  return needsUpdate;
+}
+
+bool SettingsManager::checkslideanim(QJsonObject& settingsObj) {
+  bool needsUpdate = false;
+
   if (settingsObj.contains("SlideAnimation") && isInteger(settingsObj["SlideAnimation"])) {
-    int animinfile = settingsObj["SlideAnimation"].toInt(defSlideAnim);
+    int animinfile = settingsObj["SlideAnimation"].toInt(defaultSlideAnim);
     if (animinfile < 50 || animinfile > 2000) {
-      settingsObj["SlideAnimation"] = defSlideAnim;
+      settingsObj["SlideAnimation"] = defaultSlideAnim;
       needsUpdate = true;
-      swrn << QString("Invalid slide animation int found (%1), defaulted it to %2").arg(animinfile, defSlideAnim);
+      swrn << QString("Invalid slide animation int found (%1), defaulted it to %2").arg(animinfile, defaultSlideAnim);
     }
   } else {
-    settingsObj["SlideAnimation"] = defSlideAnim;
+    settingsObj["SlideAnimation"] = defaultSlideAnim;
     swrn << "SlideAnimation key not found or invalid, added";
     needsUpdate = true;
   }
 
-  sinfo << "Settings validated. NEEDS UPDATE : " << (needsUpdate ? "YES" : "NO");
   return needsUpdate;
-}
-
-QJsonObject SettingsManager::loadSettings(const QString& path, bool& ok) {
-  ok = false;
-  QFile file(path);
-  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    fserr << "Settings file cannot be opened: " + path;
-    return QJsonObject();
-  }
-
-  QByteArray data = file.readAll();
-  file.close();
-
-  QJsonParseError parseError;
-  QJsonDocument doc = QJsonDocument::fromJson(data, &parseError);
-  if (parseError.error != QJsonParseError::NoError || !doc.isObject()) {
-    fserr << "Settings file parse error: " + parseError.errorString();
-    return QJsonObject();
-  }
-
-  ok = true;
-  return doc.object();
 }

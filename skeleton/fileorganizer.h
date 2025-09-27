@@ -29,12 +29,6 @@ class FileOrganizer : public QObject {
   QString vAssetPath(); // version-based assets
   bool updateAvailable();
 
-  // settings.json için
-  bool checkSettingsFileExists();
-  QString settingsFilePath();
-  bool createSettingsFile();
-  bool fixSettingsFile();
-
   bool ensureThemesJson(const QString& filepath, QString* erro = nullptr);
 
   // assets
@@ -43,12 +37,6 @@ class FileOrganizer : public QObject {
   QString getPatchNotes();
   bool assetExists(const QString& relpath);
   QFile getasset(const QString& relpath);
-
-  QJsonDocument loadJsonDoc(const QString& filepath);
-  QJsonObject loadJson(const QString& filepath, QString* errm = nullptr);
-  QJsonArray loadJsonArr(const QString& filepath, QString* errm = nullptr);
-  bool saveJson(const QString& filepath, const QJsonObject& obj);
-  bool saveJson(const QString& filepath, const QJsonArray& obj);
 
   // relpath like this: themes/dark.qss
   bool downloadAsset(const QString& relpath);

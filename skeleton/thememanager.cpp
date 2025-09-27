@@ -16,6 +16,7 @@
 #include "loggerstream.h"
 #include "logger.h"
 #include "../etc/instances.h"
+#include "../lib/jsonworker.h"
 
 QMap<QString, QString> themeMap;
 QMap<QString, QString> reversedThemeMap;
@@ -104,7 +105,7 @@ void ThemeManager::resolveVars(QString* qssContent) {
 void ThemeManager::loadThemesFromJson() {
   themeMap.clear();
 
-  QJsonObject loaded = _forg.loadJson(themesJsonPath());
+  QJsonObject loaded = JSONWorker::loadJson(themesJsonPath());
   if (loaded.isEmpty()) {
     fserr << "Cannot load themes.json!";
     return;

@@ -2,6 +2,7 @@
 #include "../etc/instances.h"
 #include "loggerstream.h"
 #include <QSet>
+#include "../lib/jsonworker.h"
 
 FavoritesManager::FavoritesManager(QObject *parent) : QObject(parent) {
   jsonPath = _forg.appFolderPath() + "/favs.json";
@@ -24,7 +25,7 @@ static QJsonArray removeDuplicates(const QJsonArray& arr) {
 bool FavoritesManager::ensureFavs() {
   if (!QFile::exists(jsonPath)) return createJson();
   QString errM;
-  QJsonArray loadedarr = _forg.loadJsonArr(jsonPath, &errM);
+  QJsonArray loadedarr = JSONWorker::loadJsonArr(jsonPath, &errM);
 
   if (!errM.isEmpty()) {
     fserr << errM;
@@ -81,7 +82,7 @@ bool FavoritesManager::existsFavorite(const QString& tool) {
 }
 
 bool FavoritesManager::createJson() {
-  if (!_forg.saveJson(jsonPath, QJsonArray{})) {
+  if (!JSONWorker::saveJson(jsonPath, QJsonArray{})) {
     fserr << "Cannot create favs.json!";
     return false;
   }
@@ -91,7 +92,7 @@ bool FavoritesManager::createJson() {
 }
 
 void FavoritesManager::saveOnExit() {
-  if (!_forg.saveJson(jsonPath, favsJson)) {
+  if (!JSONWorker::saveJson(jsonPath, favsJson)) {
     fserr << "Cannot save favs.json!";
   }
 }

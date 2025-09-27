@@ -16,6 +16,8 @@
 #include "settingsmanager.h"
 #include "assetvalidator.h"
 
+#include "../lib/jsonworker.h"
+
 QString FileOrganizer::appFolderPath() {
   QString base =
       QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
@@ -87,45 +89,6 @@ bool FileOrganizer::ensureAppDataFolderExists() {
   return true;
 }
 
-QString FileOrganizer::settingsFilePath() {
-  return QDir(appFolderPath()).filePath("settings.json");
-}
-
-bool FileOrganizer::checkSettingsFileExists() {
-  return QFile::exists(settingsFilePath());
-}
-
-bool FileOrganizer::createSettingsFile() {
-  if (checkSettingsFileExists()) return true;
-  QJsonObject defaultSettings = _settingsman.defaultSettings();
-
-  fsinfo << "Creating settings.json file";
-  return saveJson(settingsFilePath(), defaultSettings);
-}
-
-bool FileOrganizer::fixSettingsFile() {
-  QFile file(settingsFilePath());
-  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    fswrn << "Settings.json cannot be opened, will be created.";
-    return createSettingsFile();
-  }
-
-  QByteArray data = file.readAll();
-  file.close();
-
-  QJsonParseError parseError;
-  QJsonDocument doc = QJsonDocument::fromJson(data, &parseError);
-  if (parseError.error != QJsonParseError::NoError || !doc.isObject()) {
-    fswrn << "Settings.json parse error, will be created.";
-    return createSettingsFile();
-  }
-
-  QJsonObject settingsObj = doc.object();
-  SettingsManager::instance().validateAndFixSettings(settingsObj);
-
-  return saveJson(settingsFilePath(), settingsObj);
-}
-
 QString FileOrganizer::assetUrl(const QString& relativePath) {
   return QString("https://raw.githubusercontent.com/%1/%2/%3/%4/%5")
       .arg(GITHUB_USER, GITHUB_REPO, EXTERNAL_ASSETS_BRANCH, APP_VERSION, relativePath);
@@ -136,7 +99,7 @@ bool FileOrganizer::ensureThemesJson(const QString& themesPath, QString* error) 
   QJsonObject themes = _settingsman.loadSettings(themesPath, themesOk);
 
   if (!themesOk) {
-    if (!_forg.saveJson(themesPath, defaultThemesObj)) {
+    if (!JSONWorker::saveJson(themesPath, defaultThemesObj)) {
       fscrit << "Themes.json saving failed while creating";
       if (error) *error = "Themes.json saving failed while creating";
       return false;
@@ -155,7 +118,7 @@ bool FileOrganizer::ensureThemesJson(const QString& themesPath, QString* error) 
     }
 
     if (needsUpdate) {
-      if (!_forg.saveJson(themesPath, themes)) {
+      if (!JSONWorker::saveJson(themesPath, themes)) {
         fscrit << "Themes.json saving failed after updating";
         if (error) *error = "Themes.json saving failed after updating";
         return false;
@@ -225,37 +188,6 @@ QString FileOrganizer::getPatchNotes() {
   return "Cannot load patch notes.";
 }
 
-QJsonDocument FileOrganizer::loadJsonDoc(const QString& filepath) {
-  QFile file(filepath);
-  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    fserr << "Json file cannot be opened: " + filepath;
-    return {};
-  }
-
-  QByteArray data = file.readAll();
-  file.close();
-
-  QJsonParseError parseError;
-  QJsonDocument doc = QJsonDocument::fromJson(data, &parseError);
-  if (parseError.error != QJsonParseError::NoError) {
-    fserr << "Json file parse error: " + parseError.errorString();
-    return {};
-  }
-  return doc;
-}
-
-QJsonObject FileOrganizer::loadJson(const QString& filepath, QString* error) {
-  QJsonDocument d = loadJsonDoc(filepath);
-  if (!d.isObject()) if (error) *error = filepath + " is not an JSON object!";
-  return loadJsonDoc(filepath).object();
-}
-
-QJsonArray FileOrganizer::loadJsonArr(const QString& filepath, QString* error) {
-  QJsonDocument d = loadJsonDoc(filepath);
-  if (!d.isArray()) { if (error) *error = filepath + " is not an JSON array!"; }
-  return loadJsonDoc(filepath).array();
-}
-
 bool FileOrganizer::assetExists(const QString& relpath) {
   return QFile::exists(vAssetPath() + "/" + relpath);
 }
@@ -283,30 +215,6 @@ bool FileOrganizer::ensureDefaultAssets() {
     }
   }
 
-  return true;
-}
-
-bool FileOrganizer::saveJson(const QString& filepath, const QJsonObject& obj) {
-  QFile file(filepath);
-  if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-    fswrn << "Cannot write json to " << filepath;
-    return false;
-  }
-  QJsonDocument doc(obj);
-  file.write(doc.toJson(QJsonDocument::Indented));
-  file.close();
-  return true;
-}
-
-bool FileOrganizer::saveJson(const QString& filepath, const QJsonArray& obj) {
-  QFile file(filepath);
-  if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-    fswrn << "Cannot write json to " << filepath;
-    return false;
-  }
-  QJsonDocument doc(obj);
-  file.write(doc.toJson(QJsonDocument::Indented));
-  file.close();
   return true;
 }
 

@@ -1,5 +1,5 @@
 #include "groupmanager.h"
-#include "../etc/instances.h"
+#include "../lib/jsonworker.h"
 #include "loggerstream.h"
 
 QSet<QString> GroupManager::toolKeys = {
@@ -39,11 +39,11 @@ bool GroupManager::ensureJsonFile(QString* error) {
 
 bool GroupManager::createJson() {
   fsinfo << "Creating groups.json file";
-  return _forg.saveJson(jsonDir, defaultSchema);
+  return JSONWorker::saveJson(jsonDir, defaultSchema);
 }
 
 QJsonObject GroupManager::loadJson() {
-  return _forg.loadJson(jsonDir);
+  return JSONWorker::loadJson(jsonDir);
 }
 
 QJsonObject GroupManager::getSafeJson(const QJsonObject& loadedJson, QString* error) {
@@ -119,5 +119,5 @@ bool GroupManager::setGroupEntries(const QString& group, QJsonArray arr) {
 }
 
 void GroupManager::saveOnExit() {
-  _forg.saveJson(jsonDir, groupsJson);
+  JSONWorker::saveJson(jsonDir, groupsJson);
 }

@@ -19,15 +19,7 @@ class SettingsManager : public QObject {
   }
 
   // default ayarlar
-  static const QJsonObject defaultSettings() {
-    QJsonObject obj;
-    obj["Language"] = defaultLanguageStr;
-    obj["FirstRun"] = true;
-    obj["Version"] = APP_VERSION;
-    obj["Theme"] = defaultTheme;
-    obj["SlideAnimation"] = defaultSlideAnim;
-    return obj;
-  }
+  static const QJsonObject defaultSettings;
 
   // değiştirilebilir ayarlar
   static const QStringList changableSettings;
@@ -39,7 +31,11 @@ class SettingsManager : public QObject {
 
   // fonksiyonlar
   bool validateAndFixSettings(QJsonObject& settingsObj);
-  QJsonObject loadSettings(const QString& path, bool& ok);
+  bool controlKeys(QJsonObject& settingsObj);
+  bool checkversion(QJsonObject& settingsObj);
+  bool checklang(QJsonObject& settingsObj);
+  bool checktheme(QJsonObject& settingsObj);
+  bool checkslideanim(QJsonObject& settingsObj);
 
  private:
   const QStringList supportedLanguages = LanguageManager::localeToLanguageMap.keys();

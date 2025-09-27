@@ -13,6 +13,8 @@
 #include "skeleton/settingsmanager.h"
 #include "skeleton/thememanager.h"
 #include "skeleton/versionmanager.h"
+#include "lib/jsonworker.h"
+#include "lib/cryptomanager.h"
 
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
@@ -63,24 +65,29 @@ int main(int argc, char *argv[]) {
   }
 
   // settings init
-  QString settingsPath = _forg.settingsFilePath();
+  QString settingsPath = _forg.appFolderPath() + "/settings.json";
 
-  bool ok = false;
-  QJsonObject settings = _settingsman.loadSettings(settingsPath, ok);
+  QString errm;
+  QJsonObject settings = JSONWorker::loadJson(settingsPath, &errm);
 
-  if (!ok) {
+  if (!errm.isEmpty()) {
     // set defaults when settings file corrupted or missing
-    settings = _settingsman.defaultSettings();
+    settings = _settingsman.defaultSettings;
 
     // use system default language on first run
     settings["Language"] = _langman.getsyslang();
     settings["FirstRun"] = false;
 
-    _forg.saveJson(settingsPath, settings);
+    if (!JSONWorker::saveJson(settingsPath, settings)) {
+      fscrit << "Settings file creation failed, go get a computer";
+      QMessageBox::critical(nullptr, "Fatal Error", "Settings file creation failed!");
+      return -1;
+    }
     fswrn << "Settings file was deleted or corrupted, created one.";
   } else {
     if (_settingsman.validateAndFixSettings(settings)) {
-      if (!_forg.saveJson(settingsPath, settings)) {
+      // it needs update
+      if (!JSONWorker::saveJson(settingsPath, settings)) {
         fscrit << "Settings file saving failed after validation";
         QMessageBox::critical(nullptr, "Fatal Error", "Settings file saving failed!");
         return -1;
@@ -137,6 +144,9 @@ int main(int argc, char *argv[]) {
                      _groupman.saveOnExit();
                      _favman.saveOnExit();
                    });
+
+  // init crypto
+  CryptoManager::initializeCryptoManager();
 
   MainWindow w(settings, appUpdateAvailable);
   w.setWindowIcon(QIcon(":/assets/icons/appicon.svg"));

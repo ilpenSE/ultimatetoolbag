@@ -9,8 +9,15 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(OPENSSL_ROOT_DIR "C:/msys64/mingw64")
+set(OPENSSL_CRYPTO_LIBRARY "C:/msys64/mingw64/lib/libcrypto.a")
+set(OPENSSL_SSL_LIBRARY "C:/msys64/mingw64/lib/libssl.a")
+set(OPENSSL_INCLUDE_DIR "C:/msys64/mingw64/include")
+set(OPENSSL_USE_STATIC_LIBS FALSE)
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Network Svg)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Network Svg)
+find_package(OpenSSL REQUIRED)
 
 set(TS_FILES
     assets/locale/en_US.ts
@@ -58,6 +65,9 @@ set(PROJECT_SOURCES
         aboutdialog.h aboutdialog.cpp aboutdialog.ui
         settingswin.h settingswin.cpp settingswin.ui
         lib/generictoolwidget.h lib/generictoolwidget.cpp
+        lib/cryptomanager.h lib/cryptomanager.cpp
+        lib/jsonworker.h lib/jsonworker.cpp
+        lib/unitconverter.h lib/unitconverter.cpp
         ${TS_FILES}
 )
 
@@ -119,6 +129,9 @@ target_link_libraries(UltimateToolbag
 target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
 target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
 target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
+target_link_libraries(UltimateToolbag PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+
+target_include_directories(UltimateToolbag PRIVATE ${OPENSSL_INCLUDE_DIR})
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER dev.ilpen.UltimateToolbag)

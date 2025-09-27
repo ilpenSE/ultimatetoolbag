@@ -104,6 +104,17 @@ void Logger::irError(const QString& message) { log("[IMAGE REPAIR/ERROR]", messa
 
 void Logger::irCrit(const QString& message) { log("[IMAGE REPAIR/FATAL]", message); }
 
+// json logs
+void Logger::jsonError(const QString& message) { log("[JSON WORKER/ERROR]", message); }
+void Logger::jsonWarning(const QString& message) { log("[JSON WORKER/WARNING]", message); }
+
+// crypto logs
+void Logger::cryptoInfo(const QString& message) { log("[CRYPTOGRAPHY/INFO]", message); }
+
+void Logger::cryptoWarning(const QString& message) { log("[CRYPTOGRAPHY/WARNING]", message); }
+
+void Logger::cryptoError(const QString& message) { log("[CRYPTOGRAPHY/ERROR]", message); }
+
 void Logger::log(const QString& level, const QString& message) {
   QString timeStamp =
       QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");

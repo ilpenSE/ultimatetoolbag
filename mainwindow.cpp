@@ -7,6 +7,8 @@
 #include "etc/enums.h"
 #include "skeleton/thememanager.h"
 #include "skeleton/toastmanager.h"
+#include "lib/jsonworker.h"
+#include "lib/cryptomanager.h"
 
 #include <QTreeWidget>
 #include <QTimer>
@@ -242,10 +244,14 @@ void MainWindow::openToolTab(const QString& toolName) {
 }
 
 void MainWindow::connectItemClicks(QTreeWidgetItem* it, QTreeWidget* tree) {
-  connect(tree, &QTreeWidget::itemClicked, this, [this, it](QTreeWidgetItem* clickedItem, int column){
-    if (clickedItem != it) return;
-    openToolTab(clickedItem->data(0, Qt::UserRole).toString());
-  });
+  connect(tree, &QTreeWidget::itemClicked, this,
+          [this, it](QTreeWidgetItem* clickedItem, int column) {
+            if (clickedItem != it) return;
+            QString toolName = clickedItem->data(0, Qt::UserRole).toString();
+            if (!toolName.isEmpty())
+              openToolTab(toolName);
+          }
+  );
 }
 
 // BACKEND ADDING (if it added returns true)
@@ -653,6 +659,9 @@ void MainWindow::on_searchBox_textChanged(const QString &arg1) {
 // DESTRUCTOR
 MainWindow::~MainWindow() {
   m_isClosing = true;
+
+  CryptoManager::cleanupCryptoManager();
+
   if (ui && ui->toolsStack) {
     for (int i = 0; i < ui->toolsStack->count(); ++i) {
       QWidget* widget = ui->toolsStack->widget(i);
@@ -670,7 +679,7 @@ MainWindow::~MainWindow() {
 
   // save settings to file
   if (settingsHasChanges) {
-    if (!_forg.saveJson(_forg.settingsFilePath(), m_settings)) {
+    if (!JSONWorker::saveJson(_forg.appFolderPath() + "/settings.json", m_settings)) {
       fserr << "Settings file cannot be saved!";
     }
   }
