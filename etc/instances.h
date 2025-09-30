@@ -9,6 +9,9 @@
 #include "../skeleton/groupmanager.h"
 #include "../skeleton/versionmanager.h"
 #include "../skeleton/favoritesmanager.h"
+#include "../lib/apimanager.h"
+#include "../lib/toolwidgetmanager.h"
+#include "../lib/ecbrates.h"
 
 #define _favman FavoritesManager::instance()
 #define _verman VersionManager::instance()
@@ -18,5 +21,8 @@
 #define _forg FileOrganizer::instance()
 #define _settingsman SettingsManager::instance()
 #define _avalidator AssetValidator::instance()
+#define _apiman APIManager::instance()
+#define _toolwman ToolWidgetManager::instance()
+#define _ecbrates ECBRates::instance()
 
 #endif  // INSTANCES_H

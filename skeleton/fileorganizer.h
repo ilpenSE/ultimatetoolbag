@@ -1,5 +1,4 @@
-#ifndef FILEORGANIZER_H
-#define FILEORGANIZER_H
+#pragma once
 
 #include <QDebug>
 #include <QDir>
@@ -10,7 +9,7 @@
 #include <QJsonObject>
 
 /*
- * singleton yapısı, normal classlardan farkı bu, program boyunca çalışır
+ * meyers singleton yapısı, normal classlardan farkı bu, program boyunca çalışır
  * ve aşağıdaki ayarlar sayesinde kopyalanamaz. Sadece 1 tane vardır.
  * Erişimi kolaydır, FileOrganizer::instace() ile tüm slotlara sinyallere
  * ulaşılabilir. Ayrıca sinyal/slot yapısı bunlarda daha kolaydır
@@ -41,6 +40,8 @@ class FileOrganizer : public QObject {
   // relpath like this: themes/dark.qss
   bool downloadAsset(const QString& relpath);
 
+  void checkFolder(const QString& folder, QDir dir);
+
  private:
   explicit FileOrganizer(QObject* parent = nullptr) : QObject(parent) {
     defaultThemesObj = {
@@ -60,5 +61,3 @@ class FileOrganizer : public QObject {
 
   ~FileOrganizer() override = default;
 };
-
-#endif  // FILEORGANIZER_H

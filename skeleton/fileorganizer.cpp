@@ -49,44 +49,30 @@ bool FileOrganizer::ensureAppDataFolderExists() {
       return false;
     }
     fsinfo << "Directory created: " << appFolderPath();
-  } else {
-    fsinfo << "Directory already exists: " << appFolderPath();
   }
 
   // version asset folder
-  QString vassetPath = dir.filePath(APP_VERSION);
-  QDir vassetDir(vassetPath);
-  if (!vassetDir.exists()) {
-    if (vassetDir.mkpath(".")) {
-      fsinfo << "Version asset folder created: " << vassetPath;
-    } else {
-      fserr << "Version asset folder cannot be created: " << vassetPath;
-    }
-  }
+  checkFolder(APP_VERSION, dir);
 
   // logs folder
-  QString logsPath = dir.filePath("logs");
-  QDir logsDir(logsPath);
-  if (!logsDir.exists()) {
-    if (logsDir.mkpath(".")) {
-      fsinfo << "Logs folder created: " + logsPath;
-    } else {
-      fserr << "Logs folder cannot be created: " << logsPath;
-    }
-  }
+  checkFolder("logs", dir);
 
   // cache folder
-  QString cachePath = dir.filePath("cache");
-  QDir cacheDir(cachePath);
-  if (!cacheDir.exists()) {
-    if (cacheDir.mkpath(".")) {
-      fsinfo << "Cache folder created: " + cachePath;
-    } else {
-      fserr << "Cache folder cannot be created: " + cachePath;
-    }
-  }
+  checkFolder("cache", dir);
 
   return true;
+}
+
+void FileOrganizer::checkFolder(const QString& folder, QDir dir) {
+  QString path = dir.filePath(folder);
+  QDir fdir(path);
+  if (!fdir.exists()) {
+    if (fdir.mkpath(".")) {
+      fsinfo << folder + " folder created: " + path;
+    } else {
+      fserr << folder + " folder cannot be created: " + path;
+    }
+  }
 }
 
 QString FileOrganizer::assetUrl(const QString& relativePath) {
@@ -95,10 +81,11 @@ QString FileOrganizer::assetUrl(const QString& relativePath) {
 }
 
 bool FileOrganizer::ensureThemesJson(const QString& themesPath, QString* error) {
-  bool themesOk = false;
-  QJsonObject themes = _settingsman.loadSettings(themesPath, themesOk);
+  QString errm;
+  QJsonObject themes = JSONWorker::loadJson(themesPath, &errm);
 
-  if (!themesOk) {
+  if (!errm.isEmpty()) {
+    fserr << errm;
     if (!JSONWorker::saveJson(themesPath, defaultThemesObj)) {
       fscrit << "Themes.json saving failed while creating";
       if (error) *error = "Themes.json saving failed while creating";
@@ -194,7 +181,7 @@ bool FileOrganizer::assetExists(const QString& relpath) {
 
 bool FileOrganizer::ensureDefaultAssets() {
   // create if not exists
-  QStringList assets = { "themes/dark.qss", "themes/singularity.qss", "themes/synthwave.qss", "themes/light.qss", "patchnotes.md" };
+  QStringList assets = _avalidator.getRelativePaths();
   for (const QString& a : std::as_const(assets)) {
     if (!assetExists(a)) downloadAsset(a);
   }

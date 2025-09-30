@@ -19,6 +19,11 @@ class AssetValidator : public QObject {
 
   QString calculateLocalChecksum(const QString& relpath);
   QJsonObject fetchChecksums();
+
+  QStringList getRelativePaths() {
+    return relpaths.values();
+  }
+
  private:
   QStringList defaultChecksumKeys = {"patchnotes", "t_dark", "t_light", "t_synthwave", "t_singularity"};
   QMap<QString, QString> relpaths = {

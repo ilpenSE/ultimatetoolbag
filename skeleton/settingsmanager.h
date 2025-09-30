@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QRegularExpression>
+#include <QSettings>
 
 #include "../etc/enums.h"
 #include "../etc/consts.h"
@@ -37,7 +38,9 @@ class SettingsManager : public QObject {
   bool checktheme(QJsonObject& settingsObj);
   bool checkslideanim(QJsonObject& settingsObj);
 
- private:
+  QString getCurrencyKey();
+
+ private:  
   const QStringList supportedLanguages = LanguageManager::localeToLanguageMap.keys();
   const QStringList supportedThemes = { "dark", "light", "singularity", "synthwave" };
 

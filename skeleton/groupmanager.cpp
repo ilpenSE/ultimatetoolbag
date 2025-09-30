@@ -10,11 +10,37 @@ QSet<QString> GroupManager::toolKeys = {
 };
 
 QJsonObject GroupManager::defaultSchema = {
-    { "File Converter", QJsonArray{ "pdfword", "videoaudio", "ziprar" } },
-    { "Dev Tools", QJsonArray{ "jsonprettier", "curl", "hashgen", "aesrsa", "baseencoder", "colorpicker", "regextester", "apitester" } },
-    { "Unit Converter", QJsonArray{ "length", "time", "weight", "temperature", "currency" } },
-    { "Repairers", QJsonArray{ "imagefixer", "jsonfixer" } }
-};
+    {
+     "fileconverter", QJsonObject{
+      {"name", "File Converter"},
+      {"icon", "files"},
+      {"entries", QJsonArray{ "pdfword", "videoaudio", "ziprar" }}
+    }},
+    {
+     "devtools", QJsonObject{
+      {"name", "Dev Tools"},
+      {"icon", "code"},
+      {"entries", QJsonArray{ "jsonprettier", "curl", "colorpicker", "regextester", "apitester" }}
+    }},
+    {
+     "cryptors", QJsonObject{
+        {"name", "Cryptors"},
+        {"icon", "key"},
+        {"entries", QJsonArray{ "hashgen", "aesrsa", "baseencoder" }}
+    }},
+    {
+     "unitconverters", QJsonObject{
+        {"name", "Unit Converters"},
+        {"icon", "unit"},
+        {"entries", QJsonArray{ "length", "time", "weight", "temperature", "currency" }}
+      }},
+    {
+     "fixers", QJsonObject{
+        {"name", "Fixers"},
+        {"icon", "wrench"},
+        {"entries", QJsonArray{ "imagefixer", "jsonfixer" }}
+    }}
+}; // names are user inputs
 
 bool GroupManager::ensureJsonFile(QString* error) {
   if (!QFile::exists(jsonDir)) createJson();
@@ -51,37 +77,51 @@ QJsonObject GroupManager::getSafeJson(const QJsonObject& loadedJson, QString* er
 
   for (auto it = defaultSchema.begin(); it != defaultSchema.end(); ++it) {
     QString key = it.key();
-    QJsonArray defaultArray = it.value().toArray();
+    QJsonObject defaultObj = it.value().toObject();
 
-    QJsonArray finalArray;
+    QString defaultName = defaultObj["name"].toString();
+    QString defaultIcon = defaultObj["icon"].toString();
+    QJsonArray defaultEntries = defaultObj["entries"].toArray();
+
+    QJsonObject finalObj;
     bool keyValid = true;
 
-    if (loadedJson.contains(key) && loadedJson[key].isArray()) {
-      QJsonArray loadedArray = loadedJson[key].toArray();
+    if (loadedJson.contains(key) && loadedJson[key].isObject()) {
+      QJsonObject loadedObj = loadedJson[key].toObject();
 
-      if (loadedArray.size() != defaultArray.size()) {
+              // Check if all required fields exist and have correct types
+      if (!loadedObj.contains("name") || !loadedObj["name"].isString() ||
+          !loadedObj.contains("icon") || !loadedObj["icon"].isString() ||
+          !loadedObj.contains("entries") || !loadedObj["entries"].isArray()) {
         keyValid = false;
       } else {
-        for (int i = 0; i < loadedArray.size(); ++i) {
-          if (loadedArray[i].toString() != defaultArray[i].toString()) {
-            keyValid = false;
-            break;
+        QJsonArray loadedEntries = loadedObj["entries"].toArray();
+
+        // Validate entries array
+        if (loadedEntries.size() != defaultEntries.size()) {
+          keyValid = false;
+        } else {
+          for (int i = 0; i < loadedEntries.size(); ++i) {
+            if (loadedEntries[i].toString() != defaultEntries[i].toString()) {
+              keyValid = false;
+              break;
+            }
           }
         }
       }
 
-      finalArray = keyValid ? loadedArray : defaultArray;
+      finalObj = keyValid ? loadedObj : defaultObj;
 
     } else {
       keyValid = false;
-      finalArray = defaultArray;
+      finalObj = defaultObj;
     }
 
     if (!keyValid && error) {
-      *error += QString("Key '%1' had invalid array, replaced with default.\n").arg(key);
+      *error += QString("Key '%1' had invalid structure, replaced with default.\n").arg(key);
     }
 
-    result[key] = finalArray;
+    result[key] = finalObj;
   }
 
   return result;

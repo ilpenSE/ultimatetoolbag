@@ -147,3 +147,8 @@ bool SettingsManager::checkslideanim(QJsonObject& settingsObj) {
 
   return needsUpdate;
 }
+
+QString SettingsManager::getCurrencyKey() {
+  QSettings settings("../config.ini", QSettings::IniFormat);
+  return settings.value("API/CURRENCY_KEY").toString();
+}

@@ -19,6 +19,13 @@ class UnitConverter {
   // temperature
   // CELCIUS, FAHRENHEIT, KELVIN
   static double convertTemperature(double value, Temperature from, Temperature to);
+
+  // weight
+  // KG, MG, G, LBS, OZ, T
+  static double convertWeight(double value, Weight from, Weight to);
+
+  // currency, with api
+  static double convertCurrency(double value, Currency from, Currency to);
 };
 
 #endif  // UNITCONVERTER_H

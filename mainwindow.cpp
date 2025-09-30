@@ -221,8 +221,6 @@ QWidget* MainWindow::createFavoritesPage(const QJsonArray& favs) {
   return page;
 }
 
-
-#include "lib/generictoolwidget.h"
 void MainWindow::openToolTab(const QString& toolName) {
   // Önce kontrol et, zaten açık mı
   QList<QDockWidget*> dockables = findChildren<QDockWidget*>();
@@ -236,11 +234,14 @@ void MainWindow::openToolTab(const QString& toolName) {
   QDockWidget* dock = new QDockWidget(toolName, this);
   dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
-  GenericToolWidget* w = new GenericToolWidget();
-  w->showWidget(toolName);
+  QWidget* w = _toolwman.createWidget(toolName);
 
   dock->setWidget(w);
   addDockWidget(Qt::RightDockWidgetArea, dock);
+}
+
+void MainWindow::openToolInMain(const QString& toolname) {
+  // önce bir widget var mı kontrol et
 }
 
 void MainWindow::connectItemClicks(QTreeWidgetItem* it, QTreeWidget* tree) {
@@ -249,7 +250,7 @@ void MainWindow::connectItemClicks(QTreeWidgetItem* it, QTreeWidget* tree) {
             if (clickedItem != it) return;
             QString toolName = clickedItem->data(0, Qt::UserRole).toString();
             if (!toolName.isEmpty())
-              openToolTab(toolName);
+              openToolInMain(toolName);
           }
   );
 }

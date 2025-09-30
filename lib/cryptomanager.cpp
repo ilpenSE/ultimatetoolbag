@@ -44,7 +44,7 @@ void CryptoManager::cleanupCryptoManager() {
 
 CryptoManager::CryptoManager() {}
 
-// Base64 functions (unchanged)
+// Base64 functions
 QString CryptoManager::b64encode(const QString& plaintxt) {
   return QString(plaintxt.toUtf8().toBase64());
 }

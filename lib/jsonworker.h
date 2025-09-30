@@ -18,10 +18,10 @@ class JSONWorker {
   static bool saveJson(const QString& filepath, const QJsonArray& obj);
 
   // JSON Prettier
-  QString prettify(const QString& json);
+  static QString prettify(const QString& json);
 
   // JSON Fixer
-  QString fix(const QString& json);
+  static QString fix(const QString& json);
 };
 
 #endif  // JSONWORKER_H

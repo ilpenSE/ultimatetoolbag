@@ -42,9 +42,11 @@
 #define irerr LoggerStream(&Logger::irError)
 #define ircrit LoggerStream(&Logger::irCrit)
 
-// json worker
+// json and xml worker
 #define jserr LoggerStream(&Logger::jsonError)
 #define jswrn LoggerStream(&Logger::jsonWarning)
+#define xmlerr LoggerStream(&Logger::xmlError)
+#define xmlwrn LoggerStream(&Logger::xmlWarning)
 
 // crypto manager
 #define cmerr LoggerStream(&Logger::cryptoError)
@@ -94,9 +96,11 @@ class Logger : public QObject {
   void irError(const QString& message);
   void irCrit(const QString& message);
 
-  // json log
+  // json and xml log
   void jsonError(const QString& message);
   void jsonWarning(const QString& message);
+  void xmlError(const QString& message);
+  void xmlWarning(const QString& message);
 
   // crypto logs
   void cryptoError(const QString& message);

@@ -10,6 +10,14 @@
 
 JSONWorker::JSONWorker() {}
 
+QString JSONWorker::prettify(const QString& json) {
+  return json;
+}
+
+QString JSONWorker::fix(const QString& json) {
+  return json;
+}
+
 QJsonDocument JSONWorker::loadJsonDoc(const QString& filepath) {
   QFile file(filepath);
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -26,6 +34,7 @@ QJsonDocument JSONWorker::loadJsonDoc(const QString& filepath) {
     jserr << "Json file parse error: " + parseError.errorString();
     return {};
   }
+
   return doc;
 }
 

@@ -1,7 +1,11 @@
 #include "unitconverter.h"
 #include "../etc/enums.h"
 
-UnitConverter::UnitConverter() {}
+#include "../etc/instances.h"
+
+UnitConverter::UnitConverter() {
+  _ecbrates.init();
+}
 
 double UnitConverter::convertLength(double value, Length from, Length to) {
   // metre base
@@ -31,6 +35,7 @@ double UnitConverter::convertTime(double value, Time from, Time to) {
 }
 
 double UnitConverter::convertTemperature(double value, Temperature from, Temperature to) {
+  // celcius base
   double celsius;
   switch (from) {
     case Temperature::CELCIUS:    celsius = value; break;
@@ -45,4 +50,32 @@ double UnitConverter::convertTemperature(double value, Temperature from, Tempera
   }
 
   return value;
+}
+
+double UnitConverter::convertWeight(double value, Weight from, Weight to) {
+  // grams base
+  double grams;
+  switch (from) {
+    case Weight::GRAMS:     grams = value; break;
+    case Weight::KILOGRAMS: grams = value * 1000.0; break;
+    case Weight::MILLIGRAMS:grams = value / 1000.0; break;
+    case Weight::TONS:      grams = value * 1000000.0; break;
+    case Weight::OUNCE:     grams = value * 28.349523125; break;
+    case Weight::POUNDS:    grams = value * 453.59237; break;
+  }
+
+  switch (to) {
+    case Weight::GRAMS:     return grams;
+    case Weight::KILOGRAMS: return grams / 1000.0;
+    case Weight::MILLIGRAMS:return grams * 1000.0;
+    case Weight::TONS:      return grams / 1000000.0;
+    case Weight::OUNCE:     return grams / 28.349523125;
+    case Weight::POUNDS:    return grams / 453.59237;
+  }
+  return 0.0;
+}
+
+double UnitConverter::convertCurrency(double value, Currency from, Currency to) {
+
+  return 0.0;
 }

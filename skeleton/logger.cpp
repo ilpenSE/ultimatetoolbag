@@ -104,9 +104,11 @@ void Logger::irError(const QString& message) { log("[IMAGE REPAIR/ERROR]", messa
 
 void Logger::irCrit(const QString& message) { log("[IMAGE REPAIR/FATAL]", message); }
 
-// json logs
+// json and xml logs
 void Logger::jsonError(const QString& message) { log("[JSON WORKER/ERROR]", message); }
 void Logger::jsonWarning(const QString& message) { log("[JSON WORKER/WARNING]", message); }
+void Logger::xmlError(const QString& message) { log("[XML WORKER/ERROR]", message); }
+void Logger::xmlWarning(const QString& message) { log("[XML WORKER/WARNING]", message); }
 
 // crypto logs
 void Logger::cryptoInfo(const QString& message) { log("[CRYPTOGRAPHY/INFO]", message); }

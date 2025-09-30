@@ -86,6 +86,7 @@ class MainWindow : public QMainWindow {
   void loadFavs();
   void connectItemClicks(QTreeWidgetItem* it, QTreeWidget* tree);
   void openToolTab(const QString& toolName);
+  void openToolInMain(const QString& toolName);
 
   // LRU
   QList<QString> pageOrder;

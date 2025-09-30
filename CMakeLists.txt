@@ -64,10 +64,12 @@ set(PROJECT_SOURCES
         skeleton/toastmanager.h skeleton/toastmanager.cpp
         aboutdialog.h aboutdialog.cpp aboutdialog.ui
         settingswin.h settingswin.cpp settingswin.ui
-        lib/generictoolwidget.h lib/generictoolwidget.cpp
+        lib/toolwidgetmanager.h lib/toolwidgetmanager.cpp
         lib/cryptomanager.h lib/cryptomanager.cpp
         lib/jsonworker.h lib/jsonworker.cpp
         lib/unitconverter.h lib/unitconverter.cpp
+        lib/apimanager.h lib/apimanager.cpp
+        lib/ecbrates.h lib/ecbrates.cpp
         ${TS_FILES}
 )
 
@@ -89,6 +91,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
     qt_add_executable(UltimateToolbag
         MANUAL_FINALIZATION
@@ -130,6 +133,7 @@ target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
 target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
 target_link_libraries(UltimateToolbag PRIVATE Qt6::Widgets)
 target_link_libraries(UltimateToolbag PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(UltimateToolbag PRIVATE Qt6::Core)
 
 target_include_directories(UltimateToolbag PRIVATE ${OPENSSL_INCLUDE_DIR})
 
