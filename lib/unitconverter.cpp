@@ -76,6 +76,6 @@ double UnitConverter::convertWeight(double value, Weight from, Weight to) {
 }
 
 double UnitConverter::convertCurrency(double value, Currency from, Currency to) {
-
+  // euro (EUR) base
   return 0.0;
 }

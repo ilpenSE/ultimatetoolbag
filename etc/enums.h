@@ -71,13 +71,16 @@ enum class GroupIcons {
   FOLDER, CODE, KEY, UNIT, WRENCH
 };
 
-inline GroupIcons getGroupIconEnum(const QString& codename) {
-  if (codename == "files") return GroupIcons::FOLDER;
-  if (codename == "code") return GroupIcons::CODE;
-  if (codename == "key") return GroupIcons::KEY;
-  if (codename == "unit") return GroupIcons::UNIT;
-  if (codename == "wrench") return GroupIcons::WRENCH;
+inline QHash<QString, GroupIcons> _groupIconsHash = {
+    {"files", GroupIcons::FOLDER},
+    {"code", GroupIcons::CODE},
+    {"key", GroupIcons::KEY},
+    {"unit", GroupIcons::UNIT},
+    {"wrench", GroupIcons::WRENCH}
+};
 
+inline GroupIcons getGroupIconEnum(const QString& codename) {
+  if (_groupIconsHash.contains(codename)) return _groupIconsHash[codename];
   return {};
 }
 
@@ -99,28 +102,28 @@ inline Length getLengthEnum(int index) {
       Length::METER, Length::KILOMETER, Length::INCH,
       Length::FOOT, Length::YARD, Length::MILE
   };
-  return (index >= 0 && index < 9) ? enums[index] : Length::METER;
+  return (index >= 0 && index < std::size(enums)) ? enums[index] : Length::METER;
 }
 
 inline Time getTimeEnum(int index) {
   static const Time enums[] = {
       Time::MILLISECONDS, Time::SECONDS, Time::MINUTES, Time::HOURS
   };
-  return (index >= 0 && index < 4) ? enums[index] : Time::SECONDS;
+  return (index >= 0 && index < std::size(enums)) ? enums[index] : Time::SECONDS;
 }
 
 inline Temperature getTemperatureEnum(int index) {
   static const Temperature enums[] = {
       Temperature::CELCIUS, Temperature::KELVIN, Temperature::FAHRENHEIT
   };
-  return (index >= 0 && index < 3) ? enums[index] : Temperature::CELCIUS;
+  return (index >= 0 && index < std::size(enums)) ? enums[index] : Temperature::CELCIUS;
 }
 
 inline Weight getWeightEnum(int index) {
   static const Weight enums[] = {
       Weight::MILLIGRAMS, Weight::GRAMS, Weight::KILOGRAMS, Weight::TONS, Weight::OUNCE, Weight::POUNDS
   };
-  return (index >= 0 && index < 6) ? enums[index] : Weight::GRAMS;
+  return (index >= 0 && index < std::size(enums)) ? enums[index] : Weight::GRAMS;
 }
 
 inline Currency getCurrencyEnum(int index) {
@@ -133,12 +136,9 @@ inline Currency getCurrencyEnum(int index) {
       Currency::CHF,
       Currency::CAD,
       Currency::AUD,
-      Currency::CNY,
-      Currency::RUB,
-      Currency::INR,
-      Currency::SAR
+      Currency::CNY
   };
-  return (index >= 0 && index < 12) ? enums[index] : Currency::USD;
+  return (index >= 0 && index < std::size(enums) ? enums[index] : Currency::USD);
 }
 
 // LANGUAGE ENUM

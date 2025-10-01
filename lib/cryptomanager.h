@@ -31,7 +31,7 @@ class CryptoManager {
   static QString sha384hash(const QString& plaintxt);
   static QString sha512hash(const QString& plaintxt);
 
-          // Key management functions
+  // Key management functions
   static void generateAESKey(const QString& seed = "");
   static void generateRSAKeyPair(int keySize = 2048);
   static QString getPublicKey();

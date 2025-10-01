@@ -15,7 +15,7 @@ class JSONWorker {
   static QJsonObject loadJson(const QString& filepath, QString* errm = nullptr);
   static QJsonArray loadJsonArr(const QString& filepath, QString* errm = nullptr);
   static bool saveJson(const QString& filepath, const QJsonObject& obj);
-  static bool saveJson(const QString& filepath, const QJsonArray& obj);
+  static bool saveJson(const QString& filepath, const QJsonArray& arr);
 
   // JSON Prettier
   static QString prettify(const QString& json);

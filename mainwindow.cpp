@@ -419,7 +419,6 @@ void MainWindow::on_backBtn_clicked() {
 
       // grPage must be on the stack, check out
       if (ui->toolsStack->indexOf(ui->grPage) == -1) {
-        crit << "(!!! SEGFAULT RISK !!!) grPage not in the stack!";
         ui->toolsStack->addWidget(ui->grPage);
       }
       slideTransition(currentPage, ui->grPage, true);

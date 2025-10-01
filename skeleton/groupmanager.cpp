@@ -1,6 +1,7 @@
 #include "groupmanager.h"
 #include "../lib/jsonworker.h"
 #include "loggerstream.h"
+#include "../etc/enums.h"
 
 QSet<QString> GroupManager::toolKeys = {
     "pdfword", "videoaudio", "ziprar",
@@ -43,7 +44,7 @@ QJsonObject GroupManager::defaultSchema = {
 }; // names are user inputs
 
 bool GroupManager::ensureJsonFile(QString* error) {
-  if (!QFile::exists(jsonDir)) createJson();
+  if (!QFile::exists(jsonDir)) return createJson();
 
   QJsonObject loadedJson = loadJson();
   if (loadedJson.isEmpty()) {
@@ -51,11 +52,18 @@ bool GroupManager::ensureJsonFile(QString* error) {
     return false;
   }
   QString errorM;
-  QJsonObject saferJson = getSafeJson(loadedJson, &errorM);
+  QJsonObject saferJson;
 
-  if (!errorM.isEmpty() || saferJson.empty()) {
-    *error = errorM;
-    return false;
+  bool hasSameAsDefault = checkJsonKeys(loadedJson);
+  if (!hasSameAsDefault) {
+    saferJson = defaultSchema;
+  } else {
+    saferJson = checkGroupObjects(loadedJson, &errorM);
+
+    if (!errorM.isEmpty() || saferJson.empty()) {
+      *error = errorM;
+      return false;
+    }
   }
 
   groupsJson = saferJson;
@@ -72,43 +80,41 @@ QJsonObject GroupManager::loadJson() {
   return JSONWorker::loadJson(jsonDir);
 }
 
-QJsonObject GroupManager::getSafeJson(const QJsonObject& loadedJson, QString* error) {
+QJsonObject GroupManager::checkGroupObjects(const QJsonObject& loadedJson, QString* error) {
   QJsonObject result;
 
   for (auto it = defaultSchema.begin(); it != defaultSchema.end(); ++it) {
-    QString key = it.key();
-    QJsonObject defaultObj = it.value().toObject();
-
-    QString defaultName = defaultObj["name"].toString();
-    QString defaultIcon = defaultObj["icon"].toString();
+    QString groupName = it.key(); // eg: fileconverter
+    QJsonObject defaultObj = it.value().toObject(); // eg: {"name": "File Converter", "icon":"...", "entries": ["", "", ...]}
     QJsonArray defaultEntries = defaultObj["entries"].toArray();
 
     QJsonObject finalObj;
     bool keyValid = true;
 
-    if (loadedJson.contains(key) && loadedJson[key].isObject()) {
-      QJsonObject loadedObj = loadedJson[key].toObject();
+    if (loadedJson[groupName].isObject()) {
+      QJsonObject loadedObj = loadedJson[groupName].toObject();
 
-              // Check if all required fields exist and have correct types
-      if (!loadedObj.contains("name") || !loadedObj["name"].isString() ||
-          !loadedObj.contains("icon") || !loadedObj["icon"].isString() ||
-          !loadedObj.contains("entries") || !loadedObj["entries"].isArray()) {
-        keyValid = false;
-      } else {
-        QJsonArray loadedEntries = loadedObj["entries"].toArray();
+      // Check if all required fields exist and have correct types
+      bool isEntriesValid = loadedObj.contains("entries") && loadedObj["entries"].isArray();
+      bool isNameValid = loadedObj.contains("name") && loadedObj["name"].isString();
+      bool isIconValid = loadedObj.contains("icon") && loadedObj["icon"].isString();
 
-        // Validate entries array
-        if (loadedEntries.size() != defaultEntries.size()) {
-          keyValid = false;
-        } else {
-          for (int i = 0; i < loadedEntries.size(); ++i) {
-            if (loadedEntries[i].toString() != defaultEntries[i].toString()) {
-              keyValid = false;
-              break;
-            }
-          }
+      // name control
+      // name must be 1 to 20 chars long, a-Z, 0-9, and spaces
+      if (isNameValid) {
+        QString namestr = loadedObj["name"].toString();
+        static QRegularExpression rx(R"(^[\p{L}\p{N} ]{1,20}$)");
+        if (!rx.match(namestr).hasMatch()) {
+          isNameValid = false;
         }
       }
+
+      // is icon a registered icon
+      if (isIconValid) isIconValid &= _groupIconsHash.contains(loadedObj["icon"].toString());
+
+      keyValid = isNameValid && isIconValid;
+
+      if (!isEntriesValid) keyValid = loadedObj["entries"].toArray() == defaultEntries;
 
       finalObj = keyValid ? loadedObj : defaultObj;
 
@@ -117,14 +123,19 @@ QJsonObject GroupManager::getSafeJson(const QJsonObject& loadedJson, QString* er
       finalObj = defaultObj;
     }
 
-    if (!keyValid && error) {
-      *error += QString("Key '%1' had invalid structure, replaced with default.\n").arg(key);
+    if (!keyValid) {
+      warn << QString("Key '%1' had invalid structure, replaced with default.\n").arg(groupName);
     }
 
-    result[key] = finalObj;
+    result[groupName] = finalObj;
   }
 
   return result;
+}
+
+bool GroupManager::checkJsonKeys(const QJsonObject& loadedJson) {
+  QStringList groupnames = loadedJson.keys();
+  return toolKeys == QSet<QString>(groupnames.begin(), groupnames.end());
 }
 
 bool GroupManager::existsGroup(const QString& group) {

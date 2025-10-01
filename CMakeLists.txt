@@ -70,6 +70,7 @@ set(PROJECT_SOURCES
         lib/unitconverter.h lib/unitconverter.cpp
         lib/apimanager.h lib/apimanager.cpp
         lib/ecbrates.h lib/ecbrates.cpp
+        lib/nlohmannjson.hpp
         ${TS_FILES}
 )
 

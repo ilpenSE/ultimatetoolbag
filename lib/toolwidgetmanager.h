@@ -79,8 +79,6 @@ class ToolWidgetManager : public QObject {
 
   // Utility methods
   QStringList getAvailableTools() const;
-  QStringList getToolsByCategory(const QString& category) const;
-  QStringList getCategories() const;
   ToolInfo getToolInfo(const QString& toolName) const;
 
   // Cache management

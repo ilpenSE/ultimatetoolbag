@@ -33,7 +33,8 @@ class GroupManager : public QObject {
   QJsonObject groupsJson;
   QJsonObject loadJson();
   bool createJson();
-  QJsonObject getSafeJson(const QJsonObject& loadedJson, QString* error = nullptr);
+  bool checkJsonKeys(const QJsonObject& loadedJson);
+  QJsonObject checkGroupObjects(const QJsonObject& loadedJson, QString* error = nullptr);
 
   explicit GroupManager(QObject *parent = nullptr) : QObject(parent) {};
 

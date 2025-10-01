@@ -98,7 +98,7 @@ void ToolWidgetManager::initializeFactories() {
 
 QWidget* ToolWidgetManager::createWidget(const QString& toolName, bool forceNew) {
   if (!s_toolFactories.contains(toolName)) {
-    qWarning() << "ToolWidgetManager: Unknown tool:" << toolName;
+    err << "ToolWidgetManager: Unknown tool:" << toolName;
     return nullptr;
   }
 
@@ -123,7 +123,7 @@ QWidget* ToolWidgetManager::createWidget(const QString& toolName, bool forceNew)
   // Create new widget
   QWidget* newWidget = s_toolFactories[toolName]();
   if (!newWidget) {
-    qWarning() << "ToolWidgetManager: Failed to create widget for:" << toolName;
+    err << "ToolWidgetManager: Failed to create widget for:" << toolName;
     return nullptr;
   }
 
@@ -405,24 +405,6 @@ QWidget* ToolWidgetManager::createUnitConverterWidget(const QString& title,
 // Utility methods
 QStringList ToolWidgetManager::getAvailableTools() const {
   return s_toolFactories.keys();
-}
-
-QStringList ToolWidgetManager::getToolsByCategory(const QString& category) const {
-  QStringList tools;
-  for (auto it = s_toolInfo.begin(); it != s_toolInfo.end(); ++it) {
-    if (it.value().category == category) {
-      tools << it.key();
-    }
-  }
-  return tools;
-}
-
-QStringList ToolWidgetManager::getCategories() const {
-  QSet<QString> categories;
-  for (const auto& info : s_toolInfo) {
-    categories.insert(info.category);
-  }
-  return categories.values();
 }
 
 ToolWidgetManager::ToolInfo ToolWidgetManager::getToolInfo(const QString& toolName) const {
